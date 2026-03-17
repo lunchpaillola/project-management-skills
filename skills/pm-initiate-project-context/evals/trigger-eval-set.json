@@ -1,0 +1,42 @@
+[
+  {
+    "query": "Set up a reusable project context doc for this client delivery repo so we stop repeating stakeholder and risk details every time.",
+    "should_trigger": true
+  },
+  {
+    "query": "Create .agents/project-context.md from this repository and ask me only for the missing sections.",
+    "should_trigger": true
+  },
+  {
+    "query": "We just kicked off a new implementation project, can you capture stakeholders, tools access, source-of-truth links, and communication cadence in one context file?",
+    "should_trigger": true
+  },
+  {
+    "query": "Update our existing project context file with new blockers and escalation preferences.",
+    "should_trigger": true
+  },
+  {
+    "query": "Before we continue delivery, create a project brief with scope assumptions and who decides what.",
+    "should_trigger": true
+  },
+  {
+    "query": "Help me write a Python function to parse a CSV of transactions.",
+    "should_trigger": false
+  },
+  {
+    "query": "Summarize this single markdown file in three bullets.",
+    "should_trigger": false
+  },
+  {
+    "query": "Fix this React button style regression in mobile view.",
+    "should_trigger": false
+  },
+  {
+    "query": "Generate release notes from git commits for this week.",
+    "should_trigger": false
+  },
+  {
+    "query": "Set up CI for running tests on pull requests.",
+    "should_trigger": false
+  }
+]

@@ -1,0 +1,47 @@
+{
+  "skill_name": "pm-initiate-project-context",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Set up project context for this repo from existing files, then ask me only for missing details before saving.",
+      "expected_output": "Creates `.agents/project-context.md` using the full template, asks targeted follow-ups for missing sections, and keeps unknowns as TBD.",
+      "files": [
+        "README.md",
+        "CONTRIBUTING.md"
+      ],
+      "expectations": [
+        "Defines output path as .agents/project-context.md",
+        "Uses question tool for missing information",
+        "Includes Team Working Context section",
+        "Includes Tools and Source of Truth section",
+        "Performs pre-save missing-section check"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "I already have a project context file. Update only the risks and tools sections, then show what changed.",
+      "expected_output": "Reads existing context, limits edits to requested sections, and returns concise diff/update summary.",
+      "files": [
+        ".agents/project-context.md"
+      ],
+      "expectations": [
+        "Summarizes what already exists",
+        "Updates only requested sections",
+        "Asks adjustment question via question tool",
+        "Preserves untouched sections"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Start from scratch and walk me through context section by section. Do not ask everything at once.",
+      "expected_output": "Runs conversational, section-by-section intake with targeted follow-ups and confirmation before moving on.",
+      "files": [],
+      "expectations": [
+        "Offers start-from-scratch path",
+        "Asks one section at a time",
+        "Uses question tool in follow-ups",
+        "Marks unknowns as TBD"
+      ]
+    }
+  ]
+}
