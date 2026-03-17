@@ -121,16 +121,6 @@ cp -r project-management-skills/skills/* .agents/skills/
 2. Customize skills for your delivery context
 3. Keep names stable once published
 
-## Relationship to PailFlow
-
-This repo is intentionally broader than PailFlow branding.
-
-- `project-management-skills` is the public, searchable skills layer
-- PailFlow is the productized workflow-pack and delivery-operations layer
-- public skills teach reusable patterns; private packs can add orchestration, integrations, policy, and managed runtime
-
-If you want help applying these workflows to your team, visit [pailflow.com](https://pailflow.com).
-
 ## Current skills
 
 - `pm-initiate-project-context`
