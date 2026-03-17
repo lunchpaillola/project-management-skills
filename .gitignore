@@ -6,3 +6,4 @@ coverage/
 examples/
 skills/*-workspace/
 skills/**/evals/private/
+skills/**/autoresearch-*/

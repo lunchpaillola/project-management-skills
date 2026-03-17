@@ -2,7 +2,7 @@
 name: pm-initiate-project-context
 description: Use when the user wants to create or update a reusable project context document for onboarding and delivery alignment. Also use when the user mentions project context, kickoff context, stakeholder map, project brief, delivery style, risks, communication cadence, or asks to avoid repeating foundational project details across tasks.
 metadata:
-  version: 0.1.3
+  version: 0.1.4
 ---
 
 # PM Initiate Project Context
@@ -33,6 +33,8 @@ If context exists:
 - read it and summarize what is already captured
 - ask which sections need updates
 - gather only missing or changed sections
+- lock edits to only the user-requested sections unless the user explicitly expands scope
+- preserve all untouched sections exactly as-is (including headings, order, and wording)
 
 If no context exists, offer two options:
 
@@ -62,6 +64,8 @@ If any required section cannot be drafted from repository artifacts, use the `qu
 
 If starting from scratch:
 Walk through each section below conversationally, one at a time. Do not ask all questions at once.
+
+Hard rule for conversational intake: ask about one section per turn. If the user provides multiple sections at once, acknowledge them but continue confirmation section-by-section before moving on.
 
 For each section:
 1. Briefly explain what is being captured.
@@ -183,9 +187,21 @@ After gathering information, create or update `.agents/project-context.md` using
 
 - Show the completed document or a concise diff summary.
 - Ask what needs adjustment using the question tool.
-- Before final save, verify every required section exists; if any section is missing, use the `question` tool to fill it or mark it `TBD`.
+- Before final save, run a required-section presence check for all 12 sections listed in this skill. If any section is missing, use the `question` tool to fill it or mark it `TBD`.
 - Save to `.agents/project-context.md`.
 - Tell the user: "Other PM skills should now read this context first. Run `/pm-initiate-project-context` anytime to update it."
+
+### Output contract
+
+When creating a new context file, always include:
+- the save path (`.agents/project-context.md`)
+- whether this was auto-drafted or section-by-section intake
+- a short list of sections that remain `TBD`
+
+When updating an existing context file, always include:
+- a concise update summary limited to requested sections
+- a short "unchanged sections preserved" confirmation
+- one targeted adjustment question using the `question` tool
 
 ## Rules
 
