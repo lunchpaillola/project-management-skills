@@ -1,6 +1,6 @@
 ---
 name: pm-monitor
-description: Use when the user needs project monitoring operations: intake triage, status updates, blocker/risk follow-through, owner check-ins, or a clear "what needs attention now" view. This is the monitor-stage workflow entry point that routes to the right monitor sub-workflow (for example ticket triage) and returns an execution-ready monitoring output.
+description: "Use when the user needs project monitoring operations: intake triage, status updates, blocker/risk follow-through, owner check-ins, or a clear \"what needs attention now\" view. This is the monitor-stage workflow entry point that routes to the right monitor sub-workflow (for example ticket triage) and returns an execution-ready monitoring output."
 metadata:
   version: 0.1.0
 ---

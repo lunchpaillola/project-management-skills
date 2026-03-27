@@ -4,44 +4,44 @@
     {
       "id": 1,
       "prompt": "Set up project context for this repo from existing files, then ask me only for missing details before saving.",
-      "expected_output": "Creates `.agents/project-context.md` using the full template, asks targeted follow-ups for missing sections, and keeps unknowns as TBD.",
+      "expected_output": "Creates `.agents/project-context.md` from repo context, asks only targeted missing-detail questions, and keeps unknowns as TBD.",
+      "assertions": [
+        "Does the run create or update `.agents/project-context.md` as the output file?",
+        "Before saving, does the agent ask follow-up questions only for missing details?",
+        "Does the context include both `Team Working Context` and `Tools and Source of Truth` sections?",
+        "Are unknown details explicitly marked as `TBD`?",
+        "Does the run include a pre-save check for missing sections or gaps?"
+      ],
       "files": [
         "README.md",
         "CONTRIBUTING.md"
-      ],
-      "expectations": [
-        "Defines output path as .agents/project-context.md",
-        "Uses question tool for missing information",
-        "Includes Team Working Context section",
-        "Includes Tools and Source of Truth section",
-        "Performs pre-save missing-section check"
       ]
     },
     {
       "id": 2,
       "prompt": "I already have a project context file. Update only the risks and tools sections, then show what changed.",
-      "expected_output": "Reads existing context, limits edits to requested sections, and returns concise diff/update summary.",
+      "expected_output": "Reads existing context, edits only risks/tools sections, and returns a concise change summary.",
+      "assertions": [
+        "Does the run read and summarize existing project context before editing?",
+        "Are edits limited to the risks and tools sections only?",
+        "Does the agent ask at least one targeted adjustment question if ambiguity exists?",
+        "Does the final response include a concise summary of what changed?"
+      ],
       "files": [
         ".agents/project-context.md"
-      ],
-      "expectations": [
-        "Summarizes what already exists",
-        "Updates only requested sections",
-        "Asks adjustment question via question tool",
-        "Preserves untouched sections"
       ]
     },
     {
       "id": 3,
       "prompt": "Start from scratch and walk me through context section by section. Do not ask everything at once.",
-      "expected_output": "Runs conversational, section-by-section intake with targeted follow-ups and confirmation before moving on.",
-      "files": [],
-      "expectations": [
-        "Offers start-from-scratch path",
-        "Asks one section at a time",
-        "Uses question tool in follow-ups",
-        "Marks unknowns as TBD"
-      ]
+      "expected_output": "Runs section-by-section conversational intake with confirmation checkpoints and TBD handling for unknowns.",
+      "assertions": [
+        "Does the run explicitly follow a start-from-scratch path?",
+        "Does the intake proceed one section at a time instead of asking all sections at once?",
+        "Does the run confirm completion of a section before moving to the next section?",
+        "Are unknown values explicitly marked as `TBD` during intake?"
+      ],
+      "files": []
     }
   ]
 }
