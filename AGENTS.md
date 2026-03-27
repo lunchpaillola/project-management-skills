@@ -6,6 +6,7 @@ This repository stores reusable project management skills for AI agents.
 
 - Keep skill names stable once published.
 - Version skills in `SKILL.md` frontmatter under `metadata.version` and bump on every published behavior change.
+- Versioning policy: do not bump `VERSIONS.md` or `metadata.version` during draft/branch work. Only bump versions when changes are being finalized for merge to `main` (published state).
 - Prefer broadly reusable workflows over company-specific process details.
 - Keep proprietary orchestration, customer context, and private integrations out of this repo.
 - When adding a skill, create `skills/<skill-name>/SKILL.md` first and add supporting material only as needed.

@@ -62,6 +62,13 @@ If auto-drafting:
 
 If any required section cannot be drafted from repository artifacts, use the `question` tool to collect it before saving.
 
+For section 11 (Tools and Source of Truth), always ask explicitly:
+- which MCP servers are currently used in this project
+- which non-MCP tools/systems are used
+- what each tool is used for in delivery operations
+- who owns access and whether access is ready or pending
+- what fallback/source path to use if the tool is unavailable
+
 If starting from scratch:
 Walk through each section below conversationally, one at a time. Do not ask all questions at once.
 
@@ -89,6 +96,8 @@ If any section remains incomplete after an answer, continue with targeted follow
 10. Working style and quality standards
 11. Tools, systems, and source-of-truth links
 12. Open decisions and next actions
+
+For section 11, capture not just tool names but also tool purpose and access readiness.
 
 ### Step 3: Create the document
 
@@ -167,12 +176,16 @@ After gathering information, create or update `.agents/project-context.md` using
 -
 
 ## Tools and Source of Truth
-**Tracker(s):**
-**Docs:**
-**Comms:**
-**Design/Artifacts:**
-**Access status and owners:**
+**MCP servers in use:**
 -
+
+| Tool category | Tool/system | Primary use | Access status (`connected`|`partial`|`not-connected`) | Access owner | Backup/manual path |
+|---------------|-------------|-------------|----------------------------------------------------------|--------------|--------------------|
+| Tracker | | | | | |
+| Docs | | | | | |
+| Comms | | | | | |
+| Design/Artifacts | | | | | |
+
 **Canonical source-of-truth links:**
 -
 
@@ -210,3 +223,4 @@ When updating an existing context file, always include:
 - Preserve exact stakeholder names, terms, and project language when provided.
 - Prefer stable links and canonical sources over copied notes.
 - Keep unknowns visible as `TBD`; do not hide uncertainty.
+- For tools, always capture purpose + connection status + fallback path so downstream PM skills can run even without integrations.

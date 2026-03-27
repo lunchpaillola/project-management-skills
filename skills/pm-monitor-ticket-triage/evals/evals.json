@@ -1,0 +1,23 @@
+{
+  "skill_name": "pm-monitor-ticket-triage",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Triage this mixed intake list and produce a report: 1) Client comment: 'Can we also add export to CSV by Friday?' 2) Bug: invoice total rounds incorrectly for tax-inclusive orders. 3) Internal note: design review delayed because owner OOO. 4) Duplicate request from two channels about missing confirmation email. Include response drafts and what to route into tasks.",
+      "expected_output": "A structured triage report with classification/priority, needs-info items, response drafts, task-conversion decisions, and closure signals.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "We have 12 backlog comments that went quiet after first ping. Build an actionable queue: what needs immediate response, what needs escalation, and what can be deferred with review dates. Include one concrete follow-up question per blocked item.",
+      "expected_output": "A prioritized queue with recommendation counts, explicit missing context questions, escalation targets, and closure checkpoints.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Given these support asks from a small content agency, create triage + routing + closure output: freelancer missed two briefs; client asked for extra deliverable not in monthly scope; editor reports repeated formatting bug; one request has no owner and no due date.",
+      "expected_output": "An operations-ready intake report including response queue, owner assignment gaps, task routing decisions, and close-now vs keep-open guidance.",
+      "files": []
+    }
+  ]
+}
