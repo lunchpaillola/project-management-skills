@@ -18,7 +18,7 @@ Skills are directory-based instruction packs that help AI agents recognize and e
 
 - Current maturity: early and intentionally focused
 - Core pattern: establish reusable project context first, then layer additional PM skills
-- Published skills today: `pm-initiate-project-context`, `pm-initiate-goal-initiative-map`, `pm-monitor`, `pm-monitor-ticket-triage`
+- Published skills today: `pm-initiate-project-context`, `pm-monitor`, `pm-monitor-ticket-triage`
 - Planned growth path: lifecycle lanes (`initiate`, `plan`, `execute`, `monitor`, `close`)
 
 ## Repository focus
@@ -90,7 +90,6 @@ As new skills are added, they should reference project context before generating
 | Skill | Description |
 |-------|-------------|
 | [pm-initiate-project-context](skills/pm-initiate-project-context/) | Creates or updates `.agents/project-context.md` so agents can reuse stakeholder context, delivery expectations, tools/access, risks, and source-of-truth links across project work. |
-| [pm-initiate-goal-initiative-map](skills/pm-initiate-goal-initiative-map/) | Runs an interactive initiate-phase workflow that turns quarterly goals into a focused hierarchy of initiatives, projects, and recurring execution activities in `.agents/goal-initiative-map.md`. |
 | [pm-monitor](skills/pm-monitor/) | Monitor-stage workflow entry point for intake triage, status snapshots, and risk/follow-through operations with clear next actions. |
 | [pm-monitor-ticket-triage](skills/pm-monitor-ticket-triage/) | Runs intake triage + response operations for tickets/comments/feedback with classification, priority/severity, response drafts, task routing, owner gaps, and closure signals. |
 
@@ -126,14 +125,13 @@ cp -r project-management-skills/skills/* .agents/skills/
 
 ## Current skills
 
-- `pm-initiate-project-context`
-- `pm-initiate-goal-initiative-map`
-- `pm-monitor`
-- `pm-monitor-ticket-triage`
+ - `pm-initiate-project-context`
+ - `pm-monitor`
+ - `pm-monitor-ticket-triage`
 
 ### Current skills by lane
 
-- `initiate`: `pm-initiate-project-context`, `pm-initiate-goal-initiative-map`
+- `initiate`: `pm-initiate-project-context`
 - `monitor`: `pm-monitor`, `pm-monitor-ticket-triage`
 
 ## Contributing
