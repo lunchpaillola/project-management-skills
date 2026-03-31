@@ -1,0 +1,31 @@
+name: Validate Skill Frontmatter
+
+on:
+  pull_request:
+    paths:
+      - "skills/**/SKILL.md"
+      - "scripts/validate_skill_frontmatter.rb"
+      - ".github/workflows/validate-skill-frontmatter.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "skills/**/SKILL.md"
+      - "scripts/validate_skill_frontmatter.rb"
+      - ".github/workflows/validate-skill-frontmatter.yml"
+
+jobs:
+  validate-frontmatter:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+
+      - name: Validate SKILL.md frontmatter
+        run: ruby scripts/validate_skill_frontmatter.rb
