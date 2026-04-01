@@ -1,6 +1,6 @@
 ---
 name: pm-monitor-budget
-description: Use when the user needs a monitor-stage budget health check for an active project or client engagement. This skill follows a structured project cost tracking workflow: establish baseline, gather actuals and commitments, estimate remaining cost, forecast total outcome, compare variance, and recommend the next management action. Also use when the user asks how a project is doing budget-wise, whether burn looks healthy, whether a project is drifting, or what should be connected to answer budget questions reliably.
+description: "Use when the user needs a monitor-stage budget health check for an active project or client engagement. This skill follows a structured project cost tracking workflow: establish baseline, gather actuals and commitments, estimate remaining cost, forecast total outcome, compare variance, and recommend the next management action. Also use when the user asks how a project is doing budget-wise, whether burn looks healthy, whether a project is drifting, or what should be connected to answer budget questions reliably."
 metadata:
   version: 0.2.0
 ---
