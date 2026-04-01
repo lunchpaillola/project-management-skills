@@ -16,9 +16,10 @@ Skills are directory-based instruction packs that help AI agents recognize and e
 
 ## State of the repository
 
-- Current maturity: early and intentionally focused
-- Core pattern: establish reusable project context first, then layer additional PM skills
-- Published skills today: `pm-initiate-project-context`, `pm-monitor`, `pm-monitor-ticket-triage`
+- Current maturity: early, with a concrete initiate + monitor foundation
+- Core pattern: establish reusable project context first, then route monitor work into the right sub-workflow
+- Published skills today: `pm-initiate-project-context`, `pm-monitor`, `pm-monitor-budget`, `pm-monitor-ticket-triage`
+- Strongest current lane: `monitor`
 - Planned growth path: lifecycle lanes (`initiate`, `plan`, `execute`, `monitor`, `close`)
 
 ## Repository focus
@@ -90,7 +91,8 @@ As new skills are added, they should reference project context before generating
 | Skill | Description |
 |-------|-------------|
 | [pm-initiate-project-context](skills/pm-initiate-project-context/) | Creates or updates `.agents/project-context.md` so agents can reuse stakeholder context, delivery expectations, tools/access, risks, and source-of-truth links across project work. |
-| [pm-monitor](skills/pm-monitor/) | Monitor-stage workflow entry point for intake triage, status snapshots, and risk/follow-through operations with clear next actions. |
+| [pm-monitor](skills/pm-monitor/) | Monitor-stage workflow entry point that routes requests into intake triage, status update, budget review, or risk/follow-through mode and returns an execution-ready summary with follow-ups. |
+| [pm-monitor-budget](skills/pm-monitor-budget/) | Runs a monitor-stage budget review for active delivery work by comparing baseline vs spend or hours used, estimating burn when exact actuals are incomplete, handling retainers and provisional estimates, surfacing variance drivers, and recommending stay-course, internal correction, change control, or escalation actions. |
 | [pm-monitor-ticket-triage](skills/pm-monitor-ticket-triage/) | Runs intake triage + response operations for tickets/comments/feedback with classification, priority/severity, response drafts, task routing, owner gaps, and closure signals. |
 
 ## Installation
@@ -125,14 +127,15 @@ cp -r project-management-skills/skills/* .agents/skills/
 
 ## Current skills
 
- - `pm-initiate-project-context`
- - `pm-monitor`
- - `pm-monitor-ticket-triage`
+- `pm-initiate-project-context`
+- `pm-monitor`
+- `pm-monitor-budget`
+- `pm-monitor-ticket-triage`
 
 ### Current skills by lane
 
 - `initiate`: `pm-initiate-project-context`
-- `monitor`: `pm-monitor`, `pm-monitor-ticket-triage`
+- `monitor`: `pm-monitor`, `pm-monitor-budget`, `pm-monitor-ticket-triage`
 
 ## Contributing
 

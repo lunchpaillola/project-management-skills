@@ -2,7 +2,7 @@
 name: pm-monitor
 description: "Use when the user needs project monitoring operations: intake triage, status updates, blocker/risk follow-through, owner check-ins, or a clear \"what needs attention now\" view. This is the monitor-stage workflow entry point that routes to the right monitor sub-workflow (for example ticket triage) and returns an execution-ready monitoring output."
 metadata:
-  version: 0.1.0
+  version: 0.2.0
 ---
 
 # PM Monitor
@@ -30,6 +30,7 @@ Identify what the user is trying to monitor right now:
 
 - intake quality and response flow
 - current project status snapshot
+- budget/burn/forecast health for an active project
 - risks/blockers and follow-through
 - ownership drift (items with no owner or stale updates)
 
@@ -59,15 +60,26 @@ Route to one primary mode:
    - Use when user asks about incoming tickets/comments/feedback, what needs response, or backlog cleanup.
    - Prefer using `pm-monitor-ticket-triage`.
 
-2. **Status update mode**
+2. **Budget review mode**
+   - Use when user asks about burn rate, budget drift, forecast to complete, project financial health, margin risk, or whether change control / escalation is needed.
+   - Prefer using `pm-monitor-budget`.
+
+3. **Status update mode**
    - Use when user asks for status rollup, stakeholder update, or progress snapshot.
    - Return: current status, at-risk items, decisions needed, and next milestones.
 
-3. **Risk and follow-through mode**
+4. **Risk and follow-through mode**
    - Use when user asks what is stuck, what went quiet, or what needs escalation.
    - Return: blocker list, owner gaps, overdue reviews, and escalation actions.
 
 If multiple intents are present, pick one primary mode and list secondary modes under follow-ups.
+
+Routing tie-breakers:
+
+- If the user asks what is new, what needs attention first, what needs response, or how to sort incoming work, default to **Intake triage mode** even if tool access is broken or stale-work language is present.
+- If the user asks for a project or portfolio snapshot, current status, milestones, or an exec update, default to **Status update mode** and list budget or risk checks as secondary follow-ups if mentioned.
+- If the user explicitly asks about budget, burn, forecast, margin, or change control, default to **Budget review mode**.
+- Use **Risk and follow-through mode** only when blockers, owner gaps, silence/staleness, or escalation are the primary ask rather than a secondary concern.
 
 ### Step 4: Execute selected mode
 
@@ -77,8 +89,11 @@ Execution rules:
 - do not invent owners or deadlines
 - mark unknowns as `TBD`
 - produce decision-ready outputs, not narrative-only summaries
+- stay inside the source boundary the user implied; do not mine unrelated local repo state or git activity as a substitute for PM/tool data unless the user explicitly asked you to inspect the repo as the monitor source
 
 If running intake triage mode, run the full `pm-monitor-ticket-triage` workflow.
+
+If running budget review mode, run the full `pm-monitor-budget` workflow.
 
 ### Step 5: Return monitor summary
 
@@ -116,3 +131,4 @@ Always return this structure:
 - Never close items implicitly; always state next state.
 - If blocked by missing input, return the minimum required inputs to continue.
 - If tool context is incomplete, surface the gap explicitly before recommendations.
+- If tool access is broken but the user still wants a monitor pass, keep the originally selected mode when the request makes it clear, continue with request-text context only, and ask for the minimum substitute source needed.
