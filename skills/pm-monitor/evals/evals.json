@@ -96,6 +96,18 @@
         "Does the output provide decision-ready Actions rows with explicit next state instead of treating all items as equally urgent?"
       ],
       "files": []
+    },
+    {
+      "id": 9,
+      "prompt": "How are we budget-wise for the patient onboarding project? Try to find the scope, estimate, or SOW first, then use whatever is in Linear, ClickUp, or Asana to give me your best read.",
+      "expected_output": "A monitor-stage summary that routes to budget review mode, explains why budget review is the right mode, and returns a concise budget-health signal or the minimum missing source needed.",
+      "assertions": [
+        "Does the output explicitly select Budget review mode as the primary mode?",
+        "Does the output clearly state why budget review is the right mode for this request?",
+        "Does the output indicate that the workflow should use commercial baseline sources plus PM progress sources rather than routing to intake triage?",
+        "Does the output include either a concise budget-health signal or the one best missing source needed to answer reliably?"
+      ],
+      "files": []
     }
   ]
 }
