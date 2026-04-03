@@ -108,6 +108,18 @@
         "Does the output include either a concise budget-health signal or the one best missing source needed to answer reliably?"
       ],
       "files": []
+    },
+    {
+      "id": 10,
+      "prompt": "Can you give me a leadership-ready project status snapshot before our steering meeting? I need current state, what changed this week, blockers, and decisions needed.",
+      "expected_output": "A monitor-stage summary that routes to status update mode, explains why status mode is primary, and returns a concise leadership-ready status signal with decisions and follow-through actions.",
+      "assertions": [
+        "Does the output explicitly select Status update mode as the primary mode?",
+        "Does the output clearly state why status update mode is the right mode for this request?",
+        "Does the output include current status, what changed, and what needs attention now?",
+        "Does the output include decisions needed and next actions with owner or `TBD` when unknown?"
+      ],
+      "files": []
     }
   ]
 }
