@@ -18,13 +18,13 @@ Before executing, copy this checklist and keep it updated in your working notes:
 ```text
 PM Monitor Progress
 - [ ] Step 1 complete: monitoring objective confirmed
-- [ ] Step 2 complete: available tools and sources identified
+- [ ] Step 2 complete: available context, tools, and source coverage checked
 - [ ] Step 3 complete: monitor mode selected
-- [ ] Step 4 complete: selected monitor workflow executed
+- [ ] Step 4 complete: selected monitor workflow delegated/executed
 - [ ] Step 5 complete: monitoring summary and next actions returned
 ```
 
-### Step 1: Confirm monitoring objective
+### Step 1: Confirm objective
 
 Identify what the user is trying to monitor right now:
 
@@ -36,7 +36,7 @@ Identify what the user is trying to monitor right now:
 
 If `.agents/project-context.md` exists, read it first.
 
-### Step 2: Identify available tools and sources
+### Step 2: Check context, tools, and source coverage
 
 Before running a mode, identify what the workflow can use now:
 
@@ -71,6 +71,7 @@ Route to one primary mode:
 
 4. **Risk and follow-through mode**
    - Use when user asks what is stuck, what went quiet, or what needs escalation.
+   - Prefer using `pm-monitor-risk-escalation`.
    - Return: blocker list, owner gaps, overdue reviews, and escalation actions.
 
 If multiple intents are present, pick one primary mode and list secondary modes under follow-ups.
@@ -82,7 +83,7 @@ Routing tie-breakers:
 - If the user explicitly asks about budget, burn, forecast, margin, or change control, default to **Budget review mode**.
 - Use **Risk and follow-through mode** only when blockers, owner gaps, silence/staleness, or escalation are the primary ask rather than a secondary concern.
 
-### Step 4: Execute selected mode
+### Step 4: Delegate and execute selected mode
 
 Execution rules:
 
@@ -97,6 +98,10 @@ If running intake triage mode, run the full `pm-monitor-ticket-triage` workflow.
 If running budget review mode, run the full `pm-monitor-budget` workflow.
 
 If running status mode, run the full `pm-monitor-status` workflow.
+
+If running risk and follow-through mode, run the full `pm-monitor-risk-escalation` workflow.
+
+If a referenced subskill is unavailable, run the equivalent workflow inline and preserve the same output contract.
 
 ### Step 5: Return monitor summary
 
@@ -119,13 +124,21 @@ Always return this structure:
 - Top 3 risks or priorities:
 
 ## Actions
-| Item | Owner | Next action | Due/review date | Status |
-|------|-------|-------------|-----------------|--------|
-| | | | | |
+| Item | Owner | Next action | Due/review date | Status | Evidence/source |
+|------|-------|-------------|-----------------|--------|-----------------|
+| | | | | | |
+
+## Unknowns
+- TBD:
+
+## Lane Handoff Gate
+- `monitor -> close` readiness:
+- Missing gate requirement (if any):
 
 ## Follow-ups
 - Secondary monitor modes worth running next:
 - Missing context to resolve:
+- Escalation trigger (if tolerance breach is likely):
 ```
 
 ## Rules
@@ -135,3 +148,4 @@ Always return this structure:
 - If blocked by missing input, return the minimum required inputs to continue.
 - If tool context is incomplete, surface the gap explicitly before recommendations.
 - If tool access is broken but the user still wants a monitor pass, keep the originally selected mode when the request makes it clear, continue with request-text context only, and ask for the minimum substitute source needed.
+- Keep unknowns explicit as `TBD`.

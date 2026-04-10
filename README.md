@@ -16,11 +16,11 @@ Skills are directory-based instruction packs that help AI agents recognize and e
 
 ## State of the repository
 
-- Current maturity: early, with a concrete initiate + monitor foundation
-- Core pattern: establish reusable project context first, then route monitor work into the right sub-workflow
-- Published skills today: `pm-initiate-project-context`, `pm-monitor`, `pm-monitor-budget`, `pm-monitor-status`, `pm-monitor-ticket-triage`
-- Strongest current lane: `monitor`
-- Planned growth path: lifecycle lanes (`initiate`, `plan`, `execute`, `monitor`, `close`)
+- Current maturity: baseline complete, with full 25-skill lifecycle coverage
+- Core pattern: use lane routers to choose focused sub-workflows and return decision-ready handoffs
+- Published skills today: `pm-initiate`, `pm-initiate-project-context`, `pm-initiate-problem-framing`, `pm-initiate-stakeholder-map`, `pm-initiate-charter-and-viability-gate`, `pm-plan`, `pm-plan-requirements-brief`, `pm-plan-scope-schedule-baseline`, `pm-plan-roadmap-and-prioritization`, `pm-plan-raid-raci-decision-setup`, `pm-execute`, `pm-execute-work-package-coordination`, `pm-execute-iteration-cycle`, `pm-execute-change-control`, `pm-execute-dependency-and-handoff`, `pm-monitor`, `pm-monitor-ticket-triage`, `pm-monitor-status`, `pm-monitor-budget`, `pm-monitor-risk-escalation`, `pm-close`, `pm-close-acceptance-signoff`, `pm-close-handover-transition`, `pm-close-lessons-learned`, `pm-close-benefits-review-and-archive`
+- Strongest current lane: balanced baseline coverage across all lanes
+- Planned growth path: quality refinement, eval coverage, and iterative hardening
 
 ## Repository focus
 
@@ -91,10 +91,30 @@ As new skills are added, they should reference project context before generating
 | Skill | Description |
 |-------|-------------|
 | [pm-initiate-project-context](skills/pm-initiate-project-context/) | Creates or updates `.agents/project-context.md` so agents can reuse stakeholder context, delivery expectations, tools/access, risks, and source-of-truth links across project work. |
+| [pm-initiate](skills/pm-initiate/) | Initiate-stage router that selects the right setup mode (context, problem framing, stakeholder mapping, or charter/viability gate) and returns a plan-ready handoff. |
+| [pm-initiate-problem-framing](skills/pm-initiate-problem-framing/) | Initiate-stage subskill for defining the core problem, affected stakeholders, success criteria, boundaries, and assumptions before planning. |
+| [pm-initiate-stakeholder-map](skills/pm-initiate-stakeholder-map/) | Initiate-stage subskill for mapping stakeholders, decision authority, RACI signals, and escalation paths. |
+| [pm-initiate-charter-and-viability-gate](skills/pm-initiate-charter-and-viability-gate/) | Initiate-stage subskill for charter readiness and go/go-with-conditions/no-go viability decisions with explicit gaps. |
+| [pm-plan](skills/pm-plan/) | Plan-stage router that selects planning mode (requirements, baseline, roadmap, or RAID/RACI/decision controls) and returns an execution-ready summary. |
+| [pm-plan-requirements-brief](skills/pm-plan-requirements-brief/) | Plan-stage subskill for producing a concise requirements brief with acceptance boundaries, priorities, and open decisions. |
+| [pm-plan-scope-schedule-baseline](skills/pm-plan-scope-schedule-baseline/) | Plan-stage subskill for defining scope boundaries, milestones, assumptions, and tolerance/change triggers. |
+| [pm-plan-roadmap-and-prioritization](skills/pm-plan-roadmap-and-prioritization/) | Plan-stage subskill for now/next/later sequencing and transparent prioritization tradeoffs. |
+| [pm-plan-raid-raci-decision-setup](skills/pm-plan-raid-raci-decision-setup/) | Plan-stage subskill for setting up RAID, RACI, and decision-log controls before execution. |
+| [pm-execute](skills/pm-execute/) | Execute-stage router that selects delivery operations mode (work coordination, iteration cycle, change control, or dependency/handoff) and returns monitor-ready follow-through. |
+| [pm-execute-work-package-coordination](skills/pm-execute-work-package-coordination/) | Execute-stage subskill for coordinating active work packages, owner follow-through, and sequencing clarity. |
+| [pm-execute-iteration-cycle](skills/pm-execute-iteration-cycle/) | Execute-stage subskill for sprint/cycle operations, in-cycle risk control, and carryover readiness. |
+| [pm-execute-change-control](skills/pm-execute-change-control/) | Execute-stage subskill for assessing mid-delivery change requests and routing approval/escalation decisions. |
+| [pm-execute-dependency-and-handoff](skills/pm-execute-dependency-and-handoff/) | Execute-stage subskill for dependency tracking, handoff readiness, and escalation of cross-team blockers. |
 | [pm-monitor](skills/pm-monitor/) | Monitor-stage workflow entry point that routes requests into intake triage, status update, budget review, or risk/follow-through mode and returns an execution-ready summary with follow-ups. |
 | [pm-monitor-budget](skills/pm-monitor-budget/) | Runs a monitor-stage budget review for active delivery work by comparing baseline vs spend or hours used, estimating burn when exact actuals are incomplete, handling retainers and provisional estimates, surfacing variance drivers, and recommending stay-course, internal correction, change control, or escalation actions. |
 | [pm-monitor-status](skills/pm-monitor-status/) | Runs a monitor-stage status-rollup workflow for active delivery work by synthesizing current state, recent changes, blockers, decisions needed, owner follow-through, and near-term milestones into a concise standup-ready or leadership-ready update with explicit RAG/RAID structure. |
 | [pm-monitor-ticket-triage](skills/pm-monitor-ticket-triage/) | Runs intake triage + response operations for tickets/comments/feedback with classification, priority/severity, response drafts, task routing, owner gaps, and closure signals. |
+| [pm-monitor-risk-escalation](skills/pm-monitor-risk-escalation/) | Monitor-stage subskill for tolerance-aware risk and blocker escalation with explicit decision paths, owners, and review checkpoints. |
+| [pm-close](skills/pm-close/) | Close-stage router that selects closure mode (acceptance/signoff, handover transition, lessons learned, or benefits/archive review) and returns closure-ready next actions. |
+| [pm-close-acceptance-signoff](skills/pm-close-acceptance-signoff/) | Close-stage subskill for acceptance criteria review and formal signoff decisions with clear conditional-close actions when needed. |
+| [pm-close-handover-transition](skills/pm-close-handover-transition/) | Close-stage subskill for ownership transfer readiness, handover artifacts, and continuity safeguards. |
+| [pm-close-lessons-learned](skills/pm-close-lessons-learned/) | Close-stage subskill for evidence-backed lessons and implementation actions for future delivery cycles. |
+| [pm-close-benefits-review-and-archive](skills/pm-close-benefits-review-and-archive/) | Close-stage subskill for expected-vs-observed benefit review and complete closure archive packaging. |
 
 ## Installation
 
@@ -129,15 +149,38 @@ cp -r project-management-skills/skills/* .agents/skills/
 ## Current skills
 
 - `pm-initiate-project-context`
+- `pm-initiate`
+- `pm-initiate-problem-framing`
+- `pm-initiate-stakeholder-map`
+- `pm-initiate-charter-and-viability-gate`
+- `pm-plan`
+- `pm-plan-requirements-brief`
+- `pm-plan-scope-schedule-baseline`
+- `pm-plan-roadmap-and-prioritization`
+- `pm-plan-raid-raci-decision-setup`
+- `pm-execute`
+- `pm-execute-work-package-coordination`
+- `pm-execute-iteration-cycle`
+- `pm-execute-change-control`
+- `pm-execute-dependency-and-handoff`
 - `pm-monitor`
 - `pm-monitor-budget`
 - `pm-monitor-status`
 - `pm-monitor-ticket-triage`
+- `pm-monitor-risk-escalation`
+- `pm-close`
+- `pm-close-acceptance-signoff`
+- `pm-close-handover-transition`
+- `pm-close-lessons-learned`
+- `pm-close-benefits-review-and-archive`
 
 ### Current skills by lane
 
-- `initiate`: `pm-initiate-project-context`
-- `monitor`: `pm-monitor`, `pm-monitor-budget`, `pm-monitor-status`, `pm-monitor-ticket-triage`
+- `initiate`: `pm-initiate`, `pm-initiate-project-context`, `pm-initiate-problem-framing`, `pm-initiate-stakeholder-map`, `pm-initiate-charter-and-viability-gate`
+- `plan`: `pm-plan`, `pm-plan-requirements-brief`, `pm-plan-scope-schedule-baseline`, `pm-plan-roadmap-and-prioritization`, `pm-plan-raid-raci-decision-setup`
+- `execute`: `pm-execute`, `pm-execute-work-package-coordination`, `pm-execute-iteration-cycle`, `pm-execute-change-control`, `pm-execute-dependency-and-handoff`
+- `monitor`: `pm-monitor`, `pm-monitor-ticket-triage`, `pm-monitor-status`, `pm-monitor-budget`, `pm-monitor-risk-escalation`
+- `close`: `pm-close`, `pm-close-acceptance-signoff`, `pm-close-handover-transition`, `pm-close-lessons-learned`, `pm-close-benefits-review-and-archive`
 
 ## Contributing
 
