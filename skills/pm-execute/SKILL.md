@@ -95,6 +95,9 @@ Always return this structure:
 ```md
 # Execute Summary - <YYYY-MM-DD>
 
+## Objective
+- Execution objective:
+
 ## Selected Mode
 - Mode:
 - Why selected:
@@ -118,6 +121,7 @@ Always return this structure:
 
 ## Lane Handoff Gate
 - `execute -> monitor` readiness:
+- Required active-item fields present (`Owner`, `Next action`, `Due/review date`, `Status`, `Evidence/source`):
 - Missing gate requirement (if any):
 
 ## Follow-ups
@@ -131,3 +135,4 @@ Always return this structure:
 - Return `blocked` only when no usable execution source exists.
 - Keep unknowns visible as `TBD`.
 - If execution gate is incomplete, return the minimum required inputs to continue.
+- If execute-to-monitor readiness is requested and required active-item fields are missing, set `execute -> monitor` readiness to `blocked` and list the minimum missing field additions by item.

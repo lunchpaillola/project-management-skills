@@ -116,3 +116,6 @@ Always return this structure:
 - Keep output concise and execution-ready.
 - Preserve source IDs and existing wording where possible.
 - Keep unknowns explicit as `TBD`.
+- For sparse-context prompts (for example, short Slack notes), still return the full contract sections and Actions table instead of switching to narrative-only advice.
+- In the Actions table, if owner or due/review date is not source-backed, set the cell to literal `TBD` (never infer dates from urgency words like "today" or "ASAP").
+- If execute-to-monitor handoff readiness is requested and active items are missing any required fields (`Owner`, `Next action`, `Due/review date`, `Status`, `Evidence/source`), mark handoff readiness as `blocked` and list the minimum missing field additions by item.

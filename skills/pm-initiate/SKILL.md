@@ -95,6 +95,9 @@ Always return this structure:
 ```md
 # Initiate Summary - <YYYY-MM-DD>
 
+## Objective
+- Initiate objective:
+
 ## Selected Mode
 - Mode:
 - Why selected:
@@ -118,6 +121,9 @@ Always return this structure:
 
 ## Lane Handoff Gate
 - `initiate -> plan` readiness:
+- Problem framing completeness:
+- Stakeholder map completeness:
+- Charter/viability decision completeness:
 - Missing gate requirement (if any):
 
 ## Follow-ups
@@ -131,3 +137,4 @@ Always return this structure:
 - Return `blocked` only when no usable initiate source exists.
 - Keep uncertainty explicit as `TBD`.
 - If initiation gate is incomplete, return the minimum required inputs to continue.
+- If the user asks for initiate-to-plan handoff readiness and any required gate artifact is missing, set `initiate -> plan` readiness to `blocked` and list only minimum unblock inputs.

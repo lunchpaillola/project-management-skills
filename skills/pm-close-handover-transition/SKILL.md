@@ -45,6 +45,12 @@ Use strongest available sources:
 
 Classify source quality as `high`, `medium`, or `low`.
 
+If data is incomplete:
+
+1. continue with available handover sources
+2. list exact minimum missing inputs required for reliable transition readiness
+3. return `blocked` only when no usable handover source exists
+
 ## Step 3: Assess handover artifacts and ownership map
 
 Confirm readiness of:
@@ -110,3 +116,4 @@ Always return this structure:
 - Prioritize continuity and owner clarity.
 - Never mark transition complete without evidence.
 - Keep unknowns explicit as `TBD`.
+- Do not invent support contacts, owners, or dates when source records are missing.

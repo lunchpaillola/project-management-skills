@@ -48,6 +48,8 @@ Classify source quality as `high`, `medium`, or `low`.
 If sources are partial, continue with explicit assumptions.
 Return `blocked` only when no usable risk or blocker signal exists.
 
+When source quality is `medium` or `low` (but not `blocked`), continue with a best-effort escalation view and request exactly one concrete missing source that would most improve confidence.
+
 ## Step 3: Synthesize risk, issue, and tolerance signals
 
 Separate:
@@ -84,6 +86,8 @@ Define:
 - decision deadline/review checkpoint
 - fallback if decision is delayed
 
+For each escalated item, make the fallback explicit in the returned actions (not only in working notes).
+
 Mark unknowns as `TBD`.
 
 ## Step 6: Return risk escalation output
@@ -106,6 +110,10 @@ Always return this structure:
 - Top tolerance pressure:
 - What needs attention now:
 
+## Confidence
+- Source quality: `high` | `medium` | `low`
+- One best missing source to improve confidence (if not `high`):
+
 ## Actions
 | Item | Owner | Next action | Due/review date | Status | Evidence/source |
 |------|-------|-------------|-----------------|--------|-----------------|
@@ -124,3 +132,4 @@ Always return this structure:
 - Keep output concise, operational, and decision-ready.
 - Never collapse active issues into generic risk language.
 - Keep unknowns explicit as `TBD`.
+- If confidence is below `high`, ask for one concrete missing source only.

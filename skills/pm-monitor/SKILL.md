@@ -110,6 +110,9 @@ Always return this structure:
 ```md
 # Monitor Summary - <YYYY-MM-DD>
 
+## Objective
+- Monitoring objective:
+
 ## Selected Mode
 - Mode:
 - Why selected:
@@ -133,6 +136,9 @@ Always return this structure:
 
 ## Lane Handoff Gate
 - `monitor -> close` readiness:
+- Acceptance readiness signal:
+- Open risk disposition status:
+- Closure recommendation: `go` | `go-with-conditions` | `blocked`
 - Missing gate requirement (if any):
 
 ## Follow-ups
@@ -149,3 +155,4 @@ Always return this structure:
 - If tool context is incomplete, surface the gap explicitly before recommendations.
 - If tool access is broken but the user still wants a monitor pass, keep the originally selected mode when the request makes it clear, continue with request-text context only, and ask for the minimum substitute source needed.
 - Keep unknowns explicit as `TBD`.
+- If monitor-to-close readiness is requested and gate evidence is incomplete, set closure recommendation to `blocked` and list only minimum must-fix items.

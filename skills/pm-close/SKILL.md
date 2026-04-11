@@ -104,6 +104,9 @@ Always return this structure:
 ```md
 # Close Summary - <YYYY-MM-DD>
 
+## Objective
+- Closure objective:
+
 ## Selected Mode
 - Mode:
 - Why selected:

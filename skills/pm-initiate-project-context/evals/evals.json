@@ -3,29 +3,29 @@
   "evals": [
     {
       "id": 1,
-      "prompt": "Set up project context for this repo from existing files, then ask me only for missing details before saving.",
-      "expected_output": "Creates `.agents/project-context.md` from repo context, asks only targeted missing-detail questions, and keeps unknowns as TBD.",
+      "prompt": "Create `.agents/project-context.md` from this repo and ask only for missing details before final save.",
+      "expected_output": "Builds a full 12-section project context draft at the required path, preserving unknowns as TBD and collecting only targeted missing details.",
       "assertions": [
-        "Does the run create or update `.agents/project-context.md` as the output file?",
-        "Before saving, does the agent ask follow-up questions only for missing details?",
-        "Does the context include both `Team Working Context` and `Tools and Source of Truth` sections?",
-        "Are unknown details explicitly marked as `TBD`?",
-        "Does the run include a pre-save check for missing sections or gaps?"
+        "Does the run create or update `.agents/project-context.md`?",
+        "Does the created document include all 12 required sections from the skill template?",
+        "Are incomplete values explicitly marked as `TBD` instead of invented?",
+        "Before final save, does the agent ask targeted follow-up questions only for missing sections?",
+        "Does the final response state save path, drafting path (auto-draft or section-by-section), and remaining `TBD` sections?"
       ],
       "files": [
         "README.md",
-        "CONTRIBUTING.md"
+        "docs/"
       ]
     },
     {
       "id": 2,
-      "prompt": "I already have a project context file. Update only the risks and tools sections, then show what changed.",
-      "expected_output": "Reads existing context, edits only risks/tools sections, and returns a concise change summary.",
+      "prompt": "We already have `.agents/project-context.md`. Update only Risks and Tools sections for new blockers and access changes, then show what changed.",
+      "expected_output": "Reads existing context, limits edits to requested sections, preserves untouched sections exactly, and returns update-specific summary.",
       "assertions": [
-        "Does the run read and summarize existing project context before editing?",
-        "Are edits limited to the risks and tools sections only?",
-        "Does the agent ask at least one targeted adjustment question if ambiguity exists?",
-        "Does the final response include a concise summary of what changed?"
+        "Does the run read existing `.agents/project-context.md` before editing?",
+        "Are edits limited to Risks/Blockers/Mitigations and Tools/Source of Truth sections only?",
+        "Does the final response include an 'unchanged sections preserved' confirmation?",
+        "Does the final response include one targeted adjustment question?"
       ],
       "files": [
         ".agents/project-context.md"
@@ -33,13 +33,37 @@
     },
     {
       "id": 3,
-      "prompt": "Start from scratch and walk me through context section by section. Do not ask everything at once.",
-      "expected_output": "Runs section-by-section conversational intake with confirmation checkpoints and TBD handling for unknowns.",
+      "prompt": "Start from scratch and gather context section-by-section. Do not ask all sections in one turn.",
+      "expected_output": "Runs one-section-per-turn intake with explicit confirmation checkpoints and TBD handling for unknown values.",
       "assertions": [
-        "Does the run explicitly follow a start-from-scratch path?",
-        "Does the intake proceed one section at a time instead of asking all sections at once?",
-        "Does the run confirm completion of a section before moving to the next section?",
-        "Are unknown values explicitly marked as `TBD` during intake?"
+        "Does the run follow the start-from-scratch conversational path?",
+        "Does each turn focus on one section instead of all sections at once?",
+        "Does the run confirm section accuracy before moving on?",
+        "Are missing values marked as `TBD` when the user does not provide details?"
+      ],
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Tool details are incomplete: we know Jira and Drive exist, but no access owner, no connection status, and no fallback path. Capture this safely.",
+      "expected_output": "Produces a tools section that includes purpose and clearly marks missing owner/status/fallback values as TBD while asking only minimum follow-ups.",
+      "assertions": [
+        "In Tools and Source of Truth, does each listed tool include primary use plus access status and backup/manual path fields?",
+        "Are missing access owner, status, or fallback values marked `TBD`?",
+        "Does the run avoid guessing MCP usage or access ownership details?",
+        "Does the run ask targeted follow-up questions for only unresolved tool fields?"
+      ],
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "Edge case: there are no usable repository artifacts and I cannot provide project details yet. Try to run this anyway.",
+      "expected_output": "Returns blocked behavior with minimum required inputs to proceed and does not save fabricated project context.",
+      "assertions": [
+        "Does the output explicitly indicate blocked state when no artifact/user signal exists?",
+        "Does the output provide a minimal list of required inputs needed before save?",
+        "Does the output avoid creating a fake completed context document with invented facts?",
+        "Are unresolved values represented as `TBD` if any draft skeleton is shown?"
       ],
       "files": []
     }

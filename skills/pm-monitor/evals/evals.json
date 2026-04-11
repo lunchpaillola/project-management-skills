@@ -9,7 +9,7 @@
         "Does the output explicitly select Intake triage mode as the primary mode?",
         "Does the output clearly state why intake triage is the right mode for this request?",
         "Does the output include a clear \"what needs attention now\" signal?",
-        "Does the Actions section include a table with Item, Owner, Next action, Due/review date, and Status columns?"
+        "Does the Actions section include a table with Item, Owner, Next action, Due/review date, Status, and Evidence/source columns?"
       ],
       "files": []
     },
@@ -118,6 +118,54 @@
         "Does the output clearly state why status update mode is the right mode for this request?",
         "Does the output include current status, what changed, and what needs attention now?",
         "Does the output include decisions needed and next actions with owner or `TBD` when unknown?"
+      ],
+      "files": []
+    },
+    {
+      "id": 11,
+      "prompt": "Slack ping only: \"quick pulse - anything I need to reply to today?\" No other context attached.",
+      "expected_output": "A monitor-stage summary that routes sparse response-focused Slack asks to intake triage mode, continues with low-confidence context, and requests the minimum missing intake source.",
+      "assertions": [
+        "Does the output explicitly select Intake triage mode as the primary mode?",
+        "Does the output avoid inventing ticket facts, owners, or due dates and keep unknowns as `TBD`?",
+        "Does the output request one concrete minimum missing source to improve triage reliability?",
+        "Does the output include the required monitor contract sections for Selected Mode, Tool Access Check, Current Signal, Actions, Unknowns, Lane Handoff Gate, and Follow-ups?"
+      ],
+      "files": []
+    },
+    {
+      "id": 12,
+      "prompt": "Need steering prep in 5 minutes: give me current project status, whether budget is drifting, and any blockers that should be escalated.",
+      "expected_output": "A monitor-stage summary that resolves multi-intent ambiguity by selecting status mode as primary and listing budget and risk checks as secondary follow-ups.",
+      "assertions": [
+        "Does the output explicitly select Status update mode as the primary mode?",
+        "Does the output list budget review and risk/escalation as secondary monitor follow-ups rather than primary routing?",
+        "Does the output include a decision-ready current signal and at least one action row with owner or `TBD`?",
+        "Does the output avoid narrative-only recap by preserving the monitor output contract sections?"
+      ],
+      "files": []
+    },
+    {
+      "id": 13,
+      "prompt": "Are we over budget on Project Delta? Also mention the top ticket that might block delivery.",
+      "expected_output": "A monitor-stage summary that selects budget review as primary when budget is explicit, while handling ticket-risk mention as a secondary follow-up.",
+      "assertions": [
+        "Does the output explicitly select Budget review mode as the primary mode?",
+        "Does the output explain why budget review is primary despite ticket/risk language?",
+        "Does the output provide either a concise budget-health signal or one best missing source if confidence is weak?",
+        "Does the output route the ticket blocker ask into a secondary monitor follow-up rather than replacing budget routing?"
+      ],
+      "files": []
+    },
+    {
+      "id": 14,
+      "prompt": "I lost access to Asana, Jira, and Slack. From message-only context, do a quick monitor pass on what needs attention first and what info you need next.",
+      "expected_output": "A monitor-stage response that keeps the selected mode from the ask intent, continues with message-only context, avoids fabricated facts, and asks for minimum substitute input instead of failing hard.",
+      "assertions": [
+        "Does the output continue with the most reasonable mode from the request instead of defaulting to `blocked` immediately?",
+        "Does the Tool Access Check explicitly call out broken access and message-only context limits?",
+        "Does the output avoid fabricated source details while still returning action-oriented next steps?",
+        "Does the output list minimum substitute input needed to proceed with higher confidence?"
       ],
       "files": []
     }

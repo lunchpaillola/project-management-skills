@@ -88,6 +88,7 @@ Always return this structure:
 - Missing tools or data gaps:
 
 ## Current Signal
+- Source confidence: `high` | `medium` | `low`
 - Requirement readiness level:
 - What is clear now:
 - What is still unresolved:
@@ -104,6 +105,7 @@ Always return this structure:
 
 ## Unknowns
 - TBD:
+- Minimum missing inputs to raise confidence:
 
 ## Follow-ups
 - Requirement decisions needed:

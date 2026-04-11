@@ -36,6 +36,42 @@
         "Does each support ask include a close-now versus keep-open decision?"
       ],
       "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Sparse Slack asks only: 'any update?', 'still broken on mobile', 'can we get this by tomorrow?', and 'who owns this now?'. Build triage report with routing and response drafts.",
+      "expected_output": "A triage output that can handle sparse chat fragments by normalizing each ask, marking unknowns as TBD, and producing response-ready routing decisions.",
+      "assertions": [
+        "Does the output normalize and cover all four sparse Slack asks as distinct intake items?",
+        "Does each item include classification, priority, owner (or `TBD`), and status recommendation?",
+        "Does the output place context-poor items in `needs-info` with one concrete follow-up question each?",
+        "Does the response queue include draft replies without promising unsupported timelines?"
+      ],
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "I need ticket triage, but I have zero items pasted yet. Just do it from whatever you can infer.",
+      "expected_output": "A blocked triage response that asks for the minimum required intake structure rather than inventing queue items.",
+      "assertions": [
+        "Does the output return a blocked triage response when no usable intake items are provided?",
+        "Does the output request the minimum required inputs (item/title plus source text at minimum) instead of a broad questionnaire?",
+        "Does the output avoid fabricating tickets, owners, or priorities?",
+        "Does the response remain concise and operational rather than generic help text?"
+      ],
+      "files": []
+    },
+    {
+      "id": 6,
+      "prompt": "Triage this queue and keep full output contract: duplicate bug reports about 500 error from web and API channels, one feature request outside signed scope, one blocker waiting on legal approval, and one bug without repro steps.",
+      "expected_output": "A full-contract triage output that merges duplicates, routes out-of-scope change risk correctly, captures legal dependency escalation, and flags missing repro context.",
+      "assertions": [
+        "Does the output preserve the required report sections from Intake Summary through Closure Signals in the specified order?",
+        "Does the output merge duplicate reports into a canonical item and record the merge rationale?",
+        "Does the out-of-scope feature request receive a clear routing and likely change/escalation treatment?",
+        "Does the bug with missing repro steps appear in Needs-Info with one concrete follow-up question?"
+      ],
+      "files": []
     }
   ]
 }

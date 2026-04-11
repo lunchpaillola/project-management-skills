@@ -68,6 +68,8 @@ Confirm archive coverage:
 
 Mark missing records as `TBD`.
 
+If the user asks for archive readiness and one or more required archive-gate records are missing, set closure package state to `blocked` and list only the minimum final inputs required to archive.
+
 ## Step 5: Define post-close review actions
 
 Set:
@@ -94,6 +96,7 @@ Always return this structure:
 ## Current Signal
 - Closure package state: `complete` | `complete-with-conditions` | `incomplete` | `blocked`
 - Benefits signal confidence: `high` | `medium` | `low`
+- Archive/benefits record completion: `complete` | `incomplete` | `blocked`
 
 ## Actions
 | Item | Owner | Next action | Due/review date | Status | Evidence/source |
@@ -113,3 +116,4 @@ Always return this structure:
 - Keep close-out records auditable and practical.
 - Avoid over-claiming realized benefits.
 - Keep unknowns explicit as `TBD`.
+- If archive readiness cannot be confirmed from required records, return `blocked` with the minimum final inputs needed.

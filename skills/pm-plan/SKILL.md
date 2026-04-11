@@ -95,6 +95,9 @@ Always return this structure:
 ```md
 # Plan Summary - <YYYY-MM-DD>
 
+## Objective
+- Planning objective:
+
 ## Selected Mode
 - Mode:
 - Why selected:
@@ -118,6 +121,10 @@ Always return this structure:
 
 ## Lane Handoff Gate
 - `plan -> execute` readiness:
+- Requirements brief available:
+- Scope/schedule baseline available:
+- Roadmap/prioritization available:
+- RAID/RACI/decision setup available:
 - Missing gate requirement (if any):
 
 ## Follow-ups
@@ -131,3 +138,4 @@ Always return this structure:
 - Return `blocked` only when no usable planning source exists.
 - Keep unknowns explicit as `TBD`.
 - If planning gate is incomplete, return the minimum required inputs to continue.
+- If the user asks for plan-to-execute handoff readiness and any required gate artifact is missing, set `plan -> execute` readiness to `blocked` and list only the minimum inputs to unblock.
