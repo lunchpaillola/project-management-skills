@@ -62,6 +62,14 @@ If auto-drafting:
 
 If any required section cannot be drafted from repository artifacts, use the `question` tool to collect it before saving.
 
+No-signal fallback (required): if there are no usable repository artifacts and the user cannot provide project details yet, return `blocked` and do not save `.agents/project-context.md`.
+In that blocked response, include only the minimum required inputs to proceed:
+- engagement/project name
+- one-line project objective/problem statement
+- primary stakeholders and decision owner
+- current phase or target timeline
+- known tools/systems and source-of-truth location
+
 For section 11 (Tools and Source of Truth), always ask explicitly:
 - which MCP servers are currently used in this project
 - which non-MCP tools/systems are used

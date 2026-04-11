@@ -156,6 +156,30 @@
       ],
       "expected_output": "A balanced service-lifecycle status capturing completed work, open dependencies, and concrete next follow-through.",
       "files": []
+    },
+    {
+      "id": 14,
+      "prompt": "Need a status check but I only have this: 'things seem stuck and approvals are slow.' No tracker export, no notes, no owners.",
+      "assertions": [
+        "Does the output avoid `blocked` when a minimal narrative status signal exists?",
+        "Does the output set confidence to `low` and explicitly state source limitations?",
+        "Does the output request exactly one concrete missing source to improve reliability?",
+        "Does the output avoid fabricated owners, dates, or percentages and use `TBD` where needed?"
+      ],
+      "expected_output": "A low-confidence but still operational status output that keeps the workflow running and asks for one best missing source.",
+      "files": []
+    },
+    {
+      "id": 15,
+      "prompt": "Leadership status now: migration work is progressing, but UAT entry criteria are unclear and security approval is still pending. Keep it short.",
+      "assertions": [
+        "Does the output include the required status contract fields for Status, Confidence, Audience, Sources used, What changed, and What needs attention now?",
+        "Does the RAID Snapshot include item prefixes `[R]`, `[A]`, `[I]`, or `[D]` rather than untyped rows?",
+        "Does the output include a Milestones and Decisions section with at least one decision needed or checkpoint?",
+        "For likely amber/red conditions, does the output include at least one explicit escalation trigger?"
+      ],
+      "expected_output": "A concise leadership status output that satisfies the skill output contract and preserves RAID typing plus escalation logic.",
+      "files": []
     }
   ]
 }

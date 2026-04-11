@@ -144,6 +144,30 @@
         "Does the output recommend escalation, re-estimation, or another concrete corrective step instead of a vague warning?"
       ],
       "files": []
+    },
+    {
+      "id": 13,
+      "prompt": "Can you do budget health for this project? PM says we are behind and there are blockers, but I do not have the fee, scoped hours, SOW, or estimate doc here.",
+      "expected_output": "A blocked budget response that refuses unsupported budget judgment without a baseline and requests exactly one minimum commercial baseline source.",
+      "assertions": [
+        "Does the output return Status `blocked` when no commercial baseline source exists?",
+        "Does the output avoid claiming budget status (`on-track`, `watch`, `at-risk`) without fee/scoped-hours baseline evidence?",
+        "Does the output request one concrete baseline source (for example SOW, estimate, or fee + scoped hours) rather than a long list?",
+        "Does the output keep wording concise and decision-ready instead of a generic refusal paragraph?"
+      ],
+      "files": []
+    },
+    {
+      "id": 14,
+      "prompt": "Give me a budget read for Project Ember. Baseline is fee $120k with 420 scoped hours. PM notes say timeline is 65% elapsed, integration and QA are both unfinished, and no actual hours export is available yet.",
+      "expected_output": "A directional medium-confidence budget update that follows the budget output contract, separates source facts from inference, and asks for one best missing source.",
+      "assertions": [
+        "Does the output include the required budget contract lines for Status, Confidence, Why, Framework, Biggest budget pressure, Recommended action, and Best next step?",
+        "Does the output avoid false precision given that actual hours are missing?",
+        "Does the output use baseline plus PM progress mismatch as the core evidence path?",
+        "Does the output request one best missing source (actual hours or spend) to improve confidence?"
+      ],
+      "files": []
     }
   ]
 }
