@@ -125,19 +125,25 @@ Use `npx skills`:
 
 ```bash
 # Install all skills
-npx skills add <owner>/project-management-skills
+npx skills add lunchpaillola/project-management-skills
 
 # Install a specific skill
-npx skills add <owner>/project-management-skills --skill pm-initiate-project-context
+npx skills add lunchpaillola/project-management-skills --skill pm-initiate-project-context
 
 # List available skills
-npx skills add <owner>/project-management-skills --list
+npx skills add lunchpaillola/project-management-skills --list
+
+# Update all skills to the latest version
+npx skills update lunchpaillola/project-management-skills
+
+# Update a specific skill
+npx skills update lunchpaillola/project-management-skills --skill pm-initiate-project-context
 ```
 
 ### Option 2: Clone and Copy
 
 ```bash
-git clone https://github.com/<owner>/project-management-skills.git
+git clone https://github.com/lunchpaillola/project-management-skills.git
 cp -r project-management-skills/skills/* .agents/skills/
 ```
 
