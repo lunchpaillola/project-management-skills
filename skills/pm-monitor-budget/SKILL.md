@@ -96,6 +96,14 @@ If those sources exist, use them and give the best available answer. Only return
 
 For source-seeking or source-aware prompts, make the source state visible in the final answer. Briefly name which baseline and PM sources were checked, assumed from the prompt, or unavailable in-session. Keep this to one short line or fold it into `Basis`; do not turn it into a long source log.
 
+If connected tools were used, especially through Composio, include concise provenance:
+
+- name the specific tools used
+- cite the specific records that materially support the answer when available (ticket IDs, issue keys, PR numbers, doc names, thread links, etc.)
+- if direct links are available and short enough, include them; otherwise include stable identifiers the user can inspect
+
+Do not dump raw logs or a long audit trail. The goal is a short, decision-ready answer with enough evidence that a delivery lead can trust where the conclusion came from.
+
 ## Step 3: Establish the baseline
 
 Start with the approved or working baseline. Capture what the project was supposed to cost and deliver.
@@ -266,6 +274,7 @@ Use this default shape:
 
 If useful, add:
 - Sources used: <one short line naming the baseline and PM/delivery source used, assumed, or not available>
+- Evidence references: <specific ticket IDs, PRs, docs, or links that materially support the answer>
 - Basis: `actual financials` | `estimated from hours` | `delivery signal inference`
 - Variance view: <brief baseline vs forecast statement>
 - Assumptions: <only if they materially affect the answer>
@@ -293,6 +302,8 @@ I can't give a reliable budget signal yet.
 - Write for an executive reader first: plain language, no unnecessary sections, no filler.
 - In `Why`, prefer the strongest evidence in this order: actual spend or hours first, then schedule/progress mismatch, then scope-change or blocker drivers.
 - For source-aware prompts, visibly show what sources were used or not available without expanding into a research narrative.
+- When connected tools were consulted, always include a short provenance line. Name the tools and cite the specific records that materially influenced the answer.
+- When a Jira issue, GitHub PR, doc, or thread directly affects the recommendation, cite that item in `Why` or `Evidence references` rather than referring only to the tool in general.
 - Do not invent exact spend, margin, or completion percentages.
 - If exact burn is unavailable, do not imply that it is known.
 - If the user gave hours and rate, estimate current burn plainly and keep the estimate visibly separate from remaining-work assumptions.
@@ -394,5 +405,6 @@ This looks like a `watch` right now, but the answer is still directional rather 
 - Biggest budget pressure: delivery progress appears to be lagging the baseline.
 - Best next step: pull actual hours used to date so we can confirm whether this is just schedule noise or real burn pressure.
 - Sources used: scope doc + Asana progress; no actual hours source pulled
+- Evidence references: Asana task `ACME-142` still blocked; milestone `UAT readiness` still open
 - Basis: scoped hours + client fee + PM progress; no actual hours pulled
 ```

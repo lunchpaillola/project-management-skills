@@ -1,22 +1,22 @@
 [
   {
-    "query": "Set up a reusable project context doc for this client delivery repo so we stop repeating stakeholder and risk details every time.",
+    "query": "Set up a reusable PM context router for this delivery workspace so the team can switch between projects without re-explaining tools, sources, and active context.",
     "should_trigger": true
   },
   {
-    "query": "Create .agents/project-context.md from this repository and ask me only for the missing sections.",
+    "query": "Create .agents/project-context.md for this repo, treat it as the workspace router, and ask me only for the missing essentials.",
     "should_trigger": true
   },
   {
-    "query": "We just kicked off a new implementation project, can you capture stakeholders, tools access, source-of-truth links, and communication cadence in one context file?",
+    "query": "We just kicked off a new project called Sidebench Demo. Create a project-specific context pack with tools, sources, and working memory, and wire it into the workspace context.",
     "should_trigger": true
   },
   {
-    "query": "Update our existing project context file with new blockers and escalation preferences.",
+    "query": "Update the project context with the latest blockers and tool access notes, but if there are multiple projects in flow-projects ask me which one first.",
     "should_trigger": true
   },
   {
-    "query": "Before we continue delivery, create a project brief with scope assumptions and who decides what.",
+    "query": "Before we continue delivery, create the project context for client-b and make sure future PM skills know where to look for Jira, GitHub, and source docs.",
     "should_trigger": true
   },
   {
