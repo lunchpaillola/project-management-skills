@@ -16,9 +16,9 @@ Skills are directory-based instruction packs that help AI agents recognize and e
 
 ## State of the repository
 
-- Current maturity: baseline complete, with full 25-skill lifecycle coverage
+- Current maturity: baseline complete, with full 26-skill workflow coverage
 - Core pattern: use lane routers to choose focused sub-workflows and return decision-ready handoffs
-- Published skills today: `pm-initiate`, `pm-initiate-project-context`, `pm-initiate-problem-framing`, `pm-initiate-stakeholder-map`, `pm-initiate-charter-and-viability-gate`, `pm-plan`, `pm-plan-requirements-brief`, `pm-plan-scope-schedule-baseline`, `pm-plan-roadmap-and-prioritization`, `pm-plan-raid-raci-decision-setup`, `pm-execute`, `pm-execute-work-package-coordination`, `pm-execute-iteration-cycle`, `pm-execute-change-control`, `pm-execute-dependency-and-handoff`, `pm-monitor`, `pm-monitor-ticket-triage`, `pm-monitor-status`, `pm-monitor-budget`, `pm-monitor-risk-escalation`, `pm-close`, `pm-close-acceptance-signoff`, `pm-close-handover-transition`, `pm-close-lessons-learned`, `pm-close-benefits-review-and-archive`
+- Published skills today: `composio`, `pm-initiate`, `pm-initiate-project-context`, `pm-initiate-problem-framing`, `pm-initiate-stakeholder-map`, `pm-initiate-charter-and-viability-gate`, `pm-plan`, `pm-plan-requirements-brief`, `pm-plan-scope-schedule-baseline`, `pm-plan-roadmap-and-prioritization`, `pm-plan-raid-raci-decision-setup`, `pm-execute`, `pm-execute-work-package-coordination`, `pm-execute-iteration-cycle`, `pm-execute-change-control`, `pm-execute-dependency-and-handoff`, `pm-monitor`, `pm-monitor-ticket-triage`, `pm-monitor-status`, `pm-monitor-budget`, `pm-monitor-risk-escalation`, `pm-close`, `pm-close-acceptance-signoff`, `pm-close-handover-transition`, `pm-close-lessons-learned`, `pm-close-benefits-review-and-archive`
 - Strongest current lane: balanced baseline coverage across all lanes
 - Planned growth path: quality refinement, eval coverage, and iterative hardening
 
@@ -90,6 +90,7 @@ As new skills are added, they should reference project context before generating
 
 | Skill | Description |
 |-------|-------------|
+| [composio](skills/composio/) | Handles connected-tool workflows through Composio by choosing the right external system, checking connection state, using the smallest reliable tool path, and returning concise provenance with the specific records that support the answer. |
 | [pm-initiate-project-context](skills/pm-initiate-project-context/) | Creates or updates `.agents/project-context.md` so agents can reuse stakeholder context, delivery expectations, tools/access, risks, and source-of-truth links across project work. |
 | [pm-initiate](skills/pm-initiate/) | Initiate-stage router that selects the right setup mode (context, problem framing, stakeholder mapping, or charter/viability gate) and returns a plan-ready handoff. |
 | [pm-initiate-problem-framing](skills/pm-initiate-problem-framing/) | Initiate-stage subskill for defining the core problem, affected stakeholders, success criteria, boundaries, and assumptions before planning. |
@@ -148,6 +149,7 @@ cp -r project-management-skills/skills/* .agents/skills/
 
 ## Current skills
 
+- `composio`
 - `pm-initiate-project-context`
 - `pm-initiate`
 - `pm-initiate-problem-framing`
@@ -176,6 +178,7 @@ cp -r project-management-skills/skills/* .agents/skills/
 
 ### Current skills by lane
 
+- `tooling`: `composio`
 - `initiate`: `pm-initiate`, `pm-initiate-project-context`, `pm-initiate-problem-framing`, `pm-initiate-stakeholder-map`, `pm-initiate-charter-and-viability-gate`
 - `plan`: `pm-plan`, `pm-plan-requirements-brief`, `pm-plan-scope-schedule-baseline`, `pm-plan-roadmap-and-prioritization`, `pm-plan-raid-raci-decision-setup`
 - `execute`: `pm-execute`, `pm-execute-work-package-coordination`, `pm-execute-iteration-cycle`, `pm-execute-change-control`, `pm-execute-dependency-and-handoff`
