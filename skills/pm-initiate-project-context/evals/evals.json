@@ -3,14 +3,14 @@
   "evals": [
     {
       "id": 1,
-      "prompt": "Create `.agents/project-context.md` from this repo and ask only for missing details before final save.",
-      "expected_output": "Builds a full 12-section project context draft at the required path, preserving unknowns as TBD and collecting only targeted missing details.",
+      "prompt": "Initialize workspace-level PM context for this repo. Create the workspace router and ask only for missing essentials before final save.",
+      "expected_output": "Builds `.agents/project-context.md` as a workspace router with active project, project catalog, shared tools, routing rules, and working memory, while keeping unknowns as TBD.",
       "assertions": [
         "Does the run create or update `.agents/project-context.md`?",
-        "Does the created document include all 12 required sections from the skill template?",
+        "Does the created document include all 6 required workspace-router sections from the skill template?",
         "Are incomplete values explicitly marked as `TBD` instead of invented?",
-        "Before final save, does the agent ask targeted follow-up questions only for missing sections?",
-        "Does the final response state save path, drafting path (auto-draft or section-by-section), and remaining `TBD` sections?"
+        "Before final save, does the agent ask targeted follow-up questions only for missing essentials?",
+        "Does the final response state workspace mode, save path, drafting path (auto-draft or section-by-section), and remaining `TBD` items?"
       ],
       "files": [
         "README.md",
@@ -19,51 +19,58 @@
     },
     {
       "id": 2,
-      "prompt": "We already have `.agents/project-context.md`. Update only Risks and Tools sections for new blockers and access changes, then show what changed.",
-      "expected_output": "Reads existing context, limits edits to requested sections, preserves untouched sections exactly, and returns update-specific summary.",
+      "prompt": "Create project-specific context for a new project called Sidebench Demo. Store it in the project context pack structure and update the workspace router to point to it.",
+      "expected_output": "Creates a project pack under `.agents/flow-projects/sidebench-demo/flow-project-context.md` and adds or updates the matching project-catalog entry in the workspace router.",
       "assertions": [
-        "Does the run read existing `.agents/project-context.md` before editing?",
-        "Are edits limited to Risks/Blockers/Mitigations and Tools/Source of Truth sections only?",
-        "Does the final response include an 'unchanged sections preserved' confirmation?",
-        "Does the final response include one targeted adjustment question?"
+        "Does the run create `.agents/flow-projects/sidebench-demo/flow-project-context.md`?",
+        "Does the project-specific document include the required `Tools`, `Sources`, and `Working Memory` sections?",
+        "Does the run create or update `.agents/project-context.md` so the workspace router points to the project pack?",
+        "Are unknown project details marked as `TBD` rather than invented?",
+        "Does the final response state project mode, project slug, project-pack save path, and whether the workspace router was updated?"
       ],
       "files": [
-        ".agents/project-context.md"
+        "README.md"
       ]
     },
     {
       "id": 3,
-      "prompt": "Start from scratch and gather context section-by-section. Do not ask all sections in one turn.",
-      "expected_output": "Runs one-section-per-turn intake with explicit confirmation checkpoints and TBD handling for unknown values.",
+      "prompt": "We already have multiple project packs. Update the project context with the latest blockers and tools, but I did not say which project.",
+      "expected_output": "Reads the workspace router first, notices ambiguity, and asks which project to use before making any project-specific edits.",
       "assertions": [
-        "Does the run follow the start-from-scratch conversational path?",
-        "Does each turn focus on one section instead of all sections at once?",
-        "Does the run confirm section accuracy before moving on?",
-        "Are missing values marked as `TBD` when the user does not provide details?"
+        "Does the run read existing `.agents/project-context.md` before deciding what to update?",
+        "If multiple projects exist, does the run ask which project the request refers to?",
+        "Does the run avoid creating or updating a project-specific file before the ambiguous project is clarified?",
+        "Does the clarification happen with the `question` tool rather than by guessing?"
       ],
-      "files": []
+      "files": [
+        ".agents/project-context.md",
+        ".agents/flow-projects/"
+      ]
     },
     {
       "id": 4,
-      "prompt": "Tool details are incomplete: we know Jira and Drive exist, but no access owner, no connection status, and no fallback path. Capture this safely.",
-      "expected_output": "Produces a tools section that includes purpose and clearly marks missing owner/status/fallback values as TBD while asking only minimum follow-ups.",
+      "prompt": "We already have a project pack for client-b. Update only the `Tools` and `Working Memory` sections for that project with new access notes and a stakeholder preference, then show what changed.",
+      "expected_output": "Reads the existing project pack, limits edits to the requested sections, preserves untouched sections exactly, and returns an update-specific summary.",
       "assertions": [
-        "In Tools and Source of Truth, does each listed tool include primary use plus access status and backup/manual path fields?",
-        "Are missing access owner, status, or fallback values marked `TBD`?",
-        "Does the run avoid guessing MCP usage or access ownership details?",
-        "Does the run ask targeted follow-up questions for only unresolved tool fields?"
+        "Does the run read the target project pack before editing it?",
+        "Are edits limited to the `Tools` and `Working Memory` sections only?",
+        "Does the final response include an `unchanged sections preserved` confirmation?",
+        "Does the final response include one targeted adjustment question?"
       ],
-      "files": []
+      "files": [
+        ".agents/project-context.md",
+        ".agents/flow-projects/client-b/flow-project-context.md"
+      ]
     },
     {
       "id": 5,
-      "prompt": "Edge case: there are no usable repository artifacts and I cannot provide project details yet. Try to run this anyway.",
-      "expected_output": "Returns blocked behavior with minimum required inputs to proceed and does not save fabricated project context.",
+      "prompt": "Edge case: there are no usable repository artifacts and I cannot provide project details yet, but I still want you to initiate a project-specific context. Try to run this anyway.",
+      "expected_output": "Returns blocked behavior with the minimum required project inputs and does not save a fabricated finished project pack.",
       "assertions": [
         "Does the output explicitly indicate blocked state when no artifact/user signal exists?",
-        "Does the output provide a minimal list of required inputs needed before save?",
-        "Does the output avoid creating a fake completed context document with invented facts?",
-        "Are unresolved values represented as `TBD` if any draft skeleton is shown?"
+        "Does the output provide only the minimum required project inputs needed before save?",
+        "Does the output avoid creating a fake completed project-specific context document with invented facts?",
+        "Are unresolved values represented as `TBD` if any skeleton is shown?"
       ],
       "files": []
     }

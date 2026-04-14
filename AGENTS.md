@@ -12,3 +12,4 @@ This repository stores reusable project management skills for AI agents.
 - When adding a skill, create `skills/<skill-name>/SKILL.md` first and add supporting material only as needed.
 - When adding or removing skills, update `README.md` to reflect the current repository state.
 - Keep public eval artifacts generic; store client-specific eval prompts/data in `skills/<skill-name>/evals/private/` (gitignored).
+- For connected-tool workflows, especially Composio-backed ones, prefer concise provenance in the skill contract: name the tools used and cite the specific record IDs, doc names, links, or references that materially support the answer.
