@@ -16,9 +16,9 @@ Skills are directory-based instruction packs that help AI agents recognize and e
 
 ## State of the repository
 
-- Current maturity: baseline complete, with full 26-skill workflow coverage
+- Current maturity: baseline complete, with full 27-skill workflow coverage
 - Core pattern: use lane routers to choose focused sub-workflows and return decision-ready handoffs
-- Published skills today: `composio`, `pm-initiate`, `pm-initiate-project-context`, `pm-initiate-problem-framing`, `pm-initiate-stakeholder-map`, `pm-initiate-charter-and-viability-gate`, `pm-plan`, `pm-plan-requirements-brief`, `pm-plan-scope-schedule-baseline`, `pm-plan-roadmap-and-prioritization`, `pm-plan-raid-raci-decision-setup`, `pm-execute`, `pm-execute-work-package-coordination`, `pm-execute-iteration-cycle`, `pm-execute-change-control`, `pm-execute-dependency-and-handoff`, `pm-monitor`, `pm-monitor-ticket-triage`, `pm-monitor-status`, `pm-monitor-budget`, `pm-monitor-risk-escalation`, `pm-close`, `pm-close-acceptance-signoff`, `pm-close-handover-transition`, `pm-close-lessons-learned`, `pm-close-benefits-review-and-archive`
+- Published skills today: `composio`, `pm-initiate`, `pm-initiate-project-context`, `pm-initiate-budget`, `pm-initiate-problem-framing`, `pm-initiate-stakeholder-map`, `pm-initiate-charter-and-viability-gate`, `pm-plan`, `pm-plan-requirements-brief`, `pm-plan-scope-schedule-baseline`, `pm-plan-roadmap-and-prioritization`, `pm-plan-raid-raci-decision-setup`, `pm-execute`, `pm-execute-work-package-coordination`, `pm-execute-iteration-cycle`, `pm-execute-change-control`, `pm-execute-dependency-and-handoff`, `pm-monitor`, `pm-monitor-ticket-triage`, `pm-monitor-status`, `pm-monitor-budget`, `pm-monitor-risk-escalation`, `pm-close`, `pm-close-acceptance-signoff`, `pm-close-handover-transition`, `pm-close-lessons-learned`, `pm-close-benefits-review-and-archive`
 - Strongest current lane: balanced baseline coverage across all lanes
 - Planned growth path: quality refinement, eval coverage, and iterative hardening
 
@@ -92,7 +92,8 @@ As new skills are added, they should reference project context before generating
 |-------|-------------|
 | [composio](skills/composio/) | Handles connected-tool workflows through Composio by choosing the right external system, checking connection state, using the smallest reliable tool path, and returning concise provenance with the specific records that support the answer. |
 | [pm-initiate-project-context](skills/pm-initiate-project-context/) | Creates or updates `.agents/project-context.md` so agents can reuse stakeholder context, delivery expectations, tools/access, risks, and source-of-truth links across project work. |
-| [pm-initiate](skills/pm-initiate/) | Initiate-stage router that selects the right setup mode (context, problem framing, stakeholder mapping, or charter/viability gate) and returns a plan-ready handoff. |
+| [pm-initiate-budget](skills/pm-initiate-budget/) | Creates or updates a lightweight `.agents/project-budget.md` tracker with one row per project and simple budget-monitoring columns (baseline, spend, forecast, variance, status, owner, and notes). |
+| [pm-initiate](skills/pm-initiate/) | Initiate-stage router that selects the right setup mode (context, lightweight budget setup, problem framing, stakeholder mapping, or charter/viability gate) and returns a plan-ready handoff. |
 | [pm-initiate-problem-framing](skills/pm-initiate-problem-framing/) | Initiate-stage subskill for defining the core problem, affected stakeholders, success criteria, boundaries, and assumptions before planning. |
 | [pm-initiate-stakeholder-map](skills/pm-initiate-stakeholder-map/) | Initiate-stage subskill for mapping stakeholders, decision authority, RACI signals, and escalation paths. |
 | [pm-initiate-charter-and-viability-gate](skills/pm-initiate-charter-and-viability-gate/) | Initiate-stage subskill for charter readiness and go/go-with-conditions/no-go viability decisions with explicit gaps. |
@@ -107,7 +108,7 @@ As new skills are added, they should reference project context before generating
 | [pm-execute-change-control](skills/pm-execute-change-control/) | Execute-stage subskill for assessing mid-delivery change requests and routing approval/escalation decisions. |
 | [pm-execute-dependency-and-handoff](skills/pm-execute-dependency-and-handoff/) | Execute-stage subskill for dependency tracking, handoff readiness, and escalation of cross-team blockers. |
 | [pm-monitor](skills/pm-monitor/) | Monitor-stage workflow entry point that routes requests into intake triage, status update, budget review, or risk/follow-through mode and returns an execution-ready summary with follow-ups. |
-| [pm-monitor-budget](skills/pm-monitor-budget/) | Runs a monitor-stage budget review for active delivery work by comparing baseline vs spend or hours used, estimating burn when exact actuals are incomplete, handling retainers and provisional estimates, surfacing variance drivers, and recommending stay-course, internal correction, change control, or escalation actions. |
+| [pm-monitor-budget](skills/pm-monitor-budget/) | Outcome-first budget health check: answers "Are we on budget?" with yes/no, EAC/variance, confidence level, and one decision + accountable next step (owner + due date). Supports CEO brief (2-3 lines), PM brief (4-6 lines), and Finance brief (margin-focused) modes. Includes scenario mode for "what-if" analysis. |
 | [pm-monitor-status](skills/pm-monitor-status/) | Runs a monitor-stage status-rollup workflow for active delivery work by synthesizing current state, recent changes, blockers, decisions needed, owner follow-through, and near-term milestones into a concise standup-ready or leadership-ready update with explicit RAG/RAID structure. |
 | [pm-monitor-ticket-triage](skills/pm-monitor-ticket-triage/) | Runs intake triage + response operations for tickets/comments/feedback with classification, priority/severity, response drafts, task routing, owner gaps, and closure signals. |
 | [pm-monitor-risk-escalation](skills/pm-monitor-risk-escalation/) | Monitor-stage subskill for tolerance-aware risk and blocker escalation with explicit decision paths, owners, and review checkpoints. |
@@ -157,6 +158,7 @@ cp -r project-management-skills/skills/* .agents/skills/
 
 - `composio`
 - `pm-initiate-project-context`
+- `pm-initiate-budget`
 - `pm-initiate`
 - `pm-initiate-problem-framing`
 - `pm-initiate-stakeholder-map`
@@ -185,7 +187,7 @@ cp -r project-management-skills/skills/* .agents/skills/
 ### Current skills by lane
 
 - `tooling`: `composio`
-- `initiate`: `pm-initiate`, `pm-initiate-project-context`, `pm-initiate-problem-framing`, `pm-initiate-stakeholder-map`, `pm-initiate-charter-and-viability-gate`
+- `initiate`: `pm-initiate`, `pm-initiate-project-context`, `pm-initiate-budget`, `pm-initiate-problem-framing`, `pm-initiate-stakeholder-map`, `pm-initiate-charter-and-viability-gate`
 - `plan`: `pm-plan`, `pm-plan-requirements-brief`, `pm-plan-scope-schedule-baseline`, `pm-plan-roadmap-and-prioritization`, `pm-plan-raid-raci-decision-setup`
 - `execute`: `pm-execute`, `pm-execute-work-package-coordination`, `pm-execute-iteration-cycle`, `pm-execute-change-control`, `pm-execute-dependency-and-handoff`
 - `monitor`: `pm-monitor`, `pm-monitor-ticket-triage`, `pm-monitor-status`, `pm-monitor-budget`, `pm-monitor-risk-escalation`
