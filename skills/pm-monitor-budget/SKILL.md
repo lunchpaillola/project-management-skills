@@ -49,19 +49,20 @@ Signal reliability on every answer:
 
 | Level | Data completeness | Signal |
 |-------|-------------------|--------|
-| **High** | Baseline + actuals + commitments visible | "High confidence — based on actual financials" |
+| **High** | Baseline + actuals + at least one PM progress source | "High confidence — based on actual financials + PM delivery signal" |
 | **Medium** | Baseline + strong progress signals, limited actuals | "Medium confidence — forecast based on delivery signals" |
-| **Low** | Baseline only or weak signals | "Low confidence — directional only; connect [source] to firm this up" |
+| **Low** | Baseline only or weak signals | "Low confidence — directional only; connect [PM or finance source] to firm this up" |
 
 ## Workflow (Internal)
 
-Use this lightweight 5-step model (don't expose step-by-step in output):
+Use this lightweight 6-step model (don't expose step-by-step in output):
 
 1. **Baseline**: approved fee/budget
 2. **Actuals + Commitments**: spent + in-motion work
-3. **EAC**: baseline - (actuals + commitments) = remaining, or forecast method
-4. **Variance**: EAC vs baseline
-5. **Decision + Action**: what to do, who owns it, by when
+3. **PM Signals**: schedule slip, scope churn, blockers, dependency risk
+4. **EAC**: baseline - (actuals + commitments) = remaining, or forecast method adjusted by PM signals
+5. **Variance**: EAC vs baseline
+6. **Decision + Action**: what to do, who owns it, by when
 
 ## Output Formats
 
@@ -173,9 +174,11 @@ Always apply the same thresholds regardless of audience.
 
 ## Source Rules
 
+- You must pull and weigh PM signals (e.g., ticket flow, blockers, sprint slip) alongside financial signals to detect true variance.
 - Check for sources in order: SOW/scope → tracker/status → hours/spend → backlog
-- Evidence level determines confidence: actuals + baseline = high; baseline only = low
-- Cite 1-2 human-readable sources max (e.g., "Q1 SOW, Harvest timesheets")
+- Evidence level determines confidence: actuals + baseline + PM signal = high; baseline only = low
+- If only a budget document exists, do NOT return high or medium confidence. Return `low` confidence, provide a directional answer, and name one concrete PM/delivery source to pull next (like Jira, Linear, or Asana) to reconcile delivery risk with the budget.
+- Cite 1-2 human-readable sources max (e.g., "Q1 SOW, Linear sprint board")
 - If tools used (Composio, etc.), include: "via [tool] — [record name/ID]"
 - Never dump raw logs or long ID lists
 
