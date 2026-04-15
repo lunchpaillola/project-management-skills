@@ -134,7 +134,10 @@ npx skills add lunchpaillola/project-management-skills --skill pm-initiate-proje
 # List available skills
 npx skills add lunchpaillola/project-management-skills --list
 
-# Update all skills to the latest version
+# Update all installed skills to the latest version
+npx skills update
+
+# Update all skills from this repository
 npx skills update lunchpaillola/project-management-skills
 
 # Update a specific skill
