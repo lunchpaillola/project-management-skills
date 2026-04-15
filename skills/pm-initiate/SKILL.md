@@ -1,6 +1,6 @@
 ---
 name: pm-initiate
-description: "Use when the user needs initiate-stage project setup: clarify context, frame the problem, map stakeholders, or decide whether a project is viable to start. This is the initiate workflow entry point that routes to the right initiate subskill and returns a handoff-ready summary for planning."
+description: "Use when the user needs initiate-stage project setup: clarify context, initialize a lightweight budget tracker, frame the problem, map stakeholders, or decide whether a project is viable to start. This is the initiate workflow entry point that routes to the right initiate subskill and returns a handoff-ready summary for planning."
 metadata:
   version: 0.1.0
 ---
@@ -29,6 +29,7 @@ PM Initiate Progress
 Identify the primary initiate outcome the user needs now:
 
 - establish project context for downstream skills
+- initialize a lightweight project budget tracker
 - frame the delivery problem and success lens
 - map stakeholders and decision authority
 - confirm charter readiness and viability gate decision
@@ -57,15 +58,19 @@ Route to one primary mode:
    - Use when the user asks to create or refresh reusable project context.
    - Prefer delegating to `pm-initiate-project-context`.
 
-2. **Problem framing mode**
+2. **Budget setup mode**
+   - Use when the user asks to create, initialize, or refresh a simple project budget tracker.
+   - Prefer delegating to `pm-initiate-budget`.
+
+3. **Problem framing mode**
    - Use when the user asks what problem is being solved, who it serves, success criteria, or constraints.
    - Prefer delegating to `pm-initiate-problem-framing`.
 
-3. **Stakeholder map mode**
+4. **Stakeholder map mode**
    - Use when the user asks who is involved, who decides, who approves, or who must be informed.
    - Prefer delegating to `pm-initiate-stakeholder-map`.
 
-4. **Charter and viability gate mode**
+5. **Charter and viability gate mode**
    - Use when the user asks whether to proceed, what must be true to start, or how to capture go/no-go readiness.
    - Prefer delegating to `pm-initiate-charter-and-viability-gate`.
 
@@ -74,6 +79,7 @@ If multiple intents are present, select one primary mode and list secondary mode
 Routing tie-breakers:
 
 - If the user asks for foundational project setup or repeatable team context, default to **Project context mode**.
+- If the user asks for a simple project-budget table or baseline budget tracker, default to **Budget setup mode**.
 - If the user asks "what problem are we solving" or "what outcome matters," default to **Problem framing mode**.
 - If ownership/authority is unclear, default to **Stakeholder map mode**.
 - If start readiness or go/no-go is the main ask, default to **Charter and viability gate mode**.
