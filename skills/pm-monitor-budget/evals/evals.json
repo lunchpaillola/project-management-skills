@@ -215,14 +215,22 @@
       "files": []
     },
     {
-      "id": 18,
-      "prompt": "What's the budget status for Project Ember? I need the short version for the board meeting. Baseline $120k, actual hours 340, commitments roughly 80 hours remaining, EAC trending around $145k.",
-      "expected_output": "A 2-3 line CEO brief with yes/no, variance %, one action.",
+      "id": 19,
+      "prompt": "Here's the budget doc: we have a $20k budget and have spent $12k. Is the budget on track?",
+      "expected_output": "A low-confidence directional budget call stating that delivery progress is needed to know if $8k remaining is enough.",
       "assertions": [
-        "Is the response 2-3 lines maximum?",
-        "Does it lead with yes/no?",
-        "Does it include variance % (~21% over)?",
-        "Does it end with one decision for the board?"
+        "Does the output state 'Low confidence' since only financial numbers were provided?",
+        "Does the output recommend pulling a PM/delivery source (like Jira, Linear) as the concrete next step?"
+      ],
+      "files": []
+    },
+    {
+      "id": 20,
+      "prompt": "The budget spreadsheet says we are 50% through the budget ($100k of $200k). However, Linear shows that we are 3 sprints behind schedule and there are 15 blocked tickets due to API changes.",
+      "expected_output": "An at-risk or watch PM brief where PM signals override the 'on-track' budget numbers.",
+      "assertions": [
+        "Does the output use the PM signals (blocked tickets, schedule slip) to predict a budget overrun?",
+        "Does the output name the blocked API tickets or schedule slip as the single biggest driver?"
       ],
       "files": []
     }
