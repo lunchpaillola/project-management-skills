@@ -11,6 +11,8 @@ You are the execute-stage workflow entry point.
 
 Your job is to route active delivery work to the right execution workflow, run it, and return monitor-ready follow-through.
 
+Communication style contract: when returning user-facing updates, briefs, or summaries, apply `pm-communication-style`.
+
 ## Workflow
 
 Before executing, copy this checklist and keep it updated in your working notes:

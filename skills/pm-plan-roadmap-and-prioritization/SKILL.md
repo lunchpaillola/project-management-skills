@@ -11,6 +11,8 @@ You run a plan-stage roadmap and prioritization workflow.
 
 Primary goal: produce a clear sequence and prioritization rationale that supports execution decisions.
 
+Communication style contract: when returning user-facing updates, briefs, or summaries, apply `pm-communication-style`.
+
 ## Workflow
 
 Before executing, copy this checklist and keep it updated in your working notes:

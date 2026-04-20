@@ -11,6 +11,8 @@ You run an execute-stage change-control workflow.
 
 Primary goal: turn in-flight change requests into explicit decisions with traceable impact and ownership.
 
+Communication style contract: when returning user-facing updates, briefs, or summaries, apply `pm-communication-style`.
+
 ## Workflow
 
 Before executing, copy this checklist and keep it updated in your working notes:

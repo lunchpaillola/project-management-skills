@@ -11,6 +11,8 @@ You run an execute-stage dependency and handoff workflow.
 
 Primary goal: reduce stall risk by making dependency ownership, handoff readiness, and escalation timing explicit.
 
+Communication style contract: when returning user-facing updates, briefs, or summaries, apply `pm-communication-style`.
+
 ## Workflow
 
 Before executing, copy this checklist and keep it updated in your working notes:

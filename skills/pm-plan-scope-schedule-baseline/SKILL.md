@@ -11,6 +11,8 @@ You run a plan-stage baseline workflow.
 
 Primary goal: establish a usable scope and schedule baseline with explicit assumptions and tolerance signals.
 
+Communication style contract: when returning user-facing updates, briefs, or summaries, apply `pm-communication-style`.
+
 ## Workflow
 
 Before executing, copy this checklist and keep it updated in your working notes:

@@ -13,6 +13,8 @@ This skill can be invoked directly, or selected via the `pm-monitor` entry-point
 
 Primary goal: make each item response-ready, owner-ready, and execution-ready.
 
+Communication style contract: when returning user-facing updates, briefs, or summaries, apply `pm-communication-style`.
+
 ## Workflow
 
 Before executing, copy this checklist and keep it updated in your working notes:

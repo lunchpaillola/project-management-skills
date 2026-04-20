@@ -11,6 +11,8 @@ You run a monitor-stage risk escalation workflow.
 
 Primary goal: convert risk and blocker signals into explicit escalation decisions and follow-through.
 
+Communication style contract: when returning user-facing updates, briefs, or summaries, apply `pm-communication-style`.
+
 ## Workflow
 
 Before executing, copy this checklist and keep it updated in your working notes:

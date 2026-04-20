@@ -11,6 +11,8 @@ You run an initiate-stage stakeholder-mapping workflow.
 
 Primary goal: make decision rights, ownership, and communication flow explicit before planning starts.
 
+Communication style contract: when returning user-facing updates, briefs, or summaries, apply `pm-communication-style`.
+
 ## Workflow
 
 Before executing, copy this checklist and keep it updated in your working notes:

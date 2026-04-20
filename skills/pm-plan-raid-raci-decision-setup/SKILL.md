@@ -11,6 +11,8 @@ You run a plan-stage governance setup workflow.
 
 Primary goal: establish usable control artifacts (RAID, RACI, decision log) before execution starts.
 
+Communication style contract: when returning user-facing updates, briefs, or summaries, apply `pm-communication-style`.
+
 ## Workflow
 
 Before executing, copy this checklist and keep it updated in your working notes:

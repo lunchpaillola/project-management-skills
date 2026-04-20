@@ -11,6 +11,8 @@ You run an initiate-stage charter and viability gate workflow.
 
 Primary goal: produce a clear go/no-go/conditional decision with explicit readiness gaps.
 
+Communication style contract: when returning user-facing updates, briefs, or summaries, apply `pm-communication-style`.
+
 ## Workflow
 
 Before executing, copy this checklist and keep it updated in your working notes:
