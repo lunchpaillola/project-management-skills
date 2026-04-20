@@ -53,6 +53,8 @@ Signal reliability on every answer:
 | **Medium** | Baseline + strong progress signals, limited actuals | "Medium confidence — forecast based on delivery signals" |
 | **Low** | Baseline only or weak signals | "Low confidence — directional only; connect [PM or finance source] to firm this up" |
 
+Communication style contract: when returning user-facing updates, briefs, or summaries, apply `pm-communication-style`.
+
 ## Workflow (Internal)
 
 Use this lightweight 6-step model (don't expose step-by-step in output):

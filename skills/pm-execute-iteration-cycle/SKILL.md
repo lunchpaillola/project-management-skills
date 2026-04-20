@@ -11,6 +11,8 @@ You run an execute-stage iteration-cycle workflow.
 
 Primary goal: keep cycle commitments realistic, visible, and decision-ready from start through close.
 
+Communication style contract: when returning user-facing updates, briefs, or summaries, apply `pm-communication-style`.
+
 ## Workflow
 
 Before executing, copy this checklist and keep it updated in your working notes:

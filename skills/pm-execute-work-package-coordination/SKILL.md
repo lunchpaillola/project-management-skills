@@ -11,6 +11,8 @@ You run an execute-stage coordination workflow for in-flight work packages.
 
 Primary goal: make execution ownership explicit and keep near-term work moving with clear next actions.
 
+Communication style contract: when returning user-facing updates, briefs, or summaries, apply `pm-communication-style`.
+
 ## Workflow
 
 Before executing, copy this checklist and keep it updated in your working notes:

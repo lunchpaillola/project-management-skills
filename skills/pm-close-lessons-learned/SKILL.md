@@ -11,6 +11,8 @@ You run a close-stage lessons-learned workflow.
 
 Primary goal: produce reusable, action-oriented learnings with owners and follow-through.
 
+Communication style contract: when returning user-facing updates, briefs, or summaries, apply `pm-communication-style`.
+
 ## Workflow
 
 Before executing, copy this checklist and keep it updated in your working notes:

@@ -11,6 +11,8 @@ You set up a lightweight, reusable project budget table where each row represent
 
 Primary goal: initialize a simple budget tracker that is fast to maintain and easy to scan.
 
+Communication style contract: when returning user-facing updates, briefs, or summaries, apply `pm-communication-style`.
+
 ## Workflow
 
 Before executing, copy this checklist and keep it updated in your working notes:

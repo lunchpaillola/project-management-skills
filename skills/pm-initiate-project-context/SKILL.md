@@ -16,6 +16,8 @@ The workspace router is the front door. It tells PM skills which project is acti
 
 The project pack is the reusable per-project context. Keep it compact and operational. It should help downstream skills quickly find tools, sources, and the most important working memory for that project.
 
+Communication style contract: when returning user-facing updates, briefs, or summaries, apply `pm-communication-style`.
+
 ## Workflow
 
 Before executing, copy this checklist and keep it updated in your working notes:

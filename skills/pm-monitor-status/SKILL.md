@@ -11,11 +11,15 @@ You run a monitor-stage status workflow that turns scattered delivery signals in
 
 Primary goal: answer "where do things stand right now, what needs attention, and what happens next?" with clear ownership and follow-through.
 
+Status writing rule: make the opening lines carry the report. Leaders should understand state and ask without scrolling.
+
 RAG/RAID operating rule:
 
 - express delivery state as RAG (`green`, `amber`, `red`, `blocked`)
 - maintain a concise RAID view (`risks`, `assumptions`, `issues`, `dependencies`)
 - map each red/amber signal to an owner, next action, and escalation trigger
+
+Communication style contract: when returning user-facing updates, briefs, or summaries, apply `pm-communication-style`.
 
 ## Workflow
 
@@ -49,6 +53,11 @@ Set audience tone and detail level:
 - team-level: specific tasks and owner actions
 - leadership-level: concise signal, major risks, and decision asks
 
+Channel-specific header rule:
+
+- email/docs: treat the title line as the subject line and include project, state, and time-bound ask
+- Slack/chat: either start with subject-line-style first line, or open with "Hi all," and put the full BLUF in the next line
+
 ## Step 2: Confirm sources and signal quality
 
 Use the strongest available sources in this order:
@@ -75,6 +84,8 @@ Build a concise status signal:
 - current state: `green`, `amber`, `red`, or `blocked`
 - what changed since the previous visible checkpoint
 - what needs attention now
+
+Prefer outcomes over activity logs. Report movement in terms of delivered impact, risk reduction, or decision progress, not meeting cadence.
 
 Use these default status heuristics unless a project-specific rubric is provided:
 
@@ -112,6 +123,10 @@ Surface the smallest set of issues that drive outcomes:
 
 Each flagged issue must include a next action and explicit next state.
 
+Risk quality gate:
+
+- treat risks without owner, trigger, and mitigation as worries; keep them out of the main report until those fields exist
+
 Do not collapse risk and issue into one bucket. If an item is happening now, classify it as an issue.
 
 ## Step 5: Clarify decisions and next milestones
@@ -129,31 +144,38 @@ If a decision owner is unclear, mark `TBD` and suggest the responsible role.
 Default to a concise, meeting-ready report:
 
 ```md
-# Status - <project name or YYYY-MM-DD>
+Hi all,
 
-- Status: `green` | `amber` | `red` | `blocked`
-- Confidence: `high` | `medium` | `low`
-- Audience: <team | leadership | mixed>
-- Sources used: <one short line>
-- What changed: <1-3 bullets>
-- What needs attention now: <1-3 bullets>
+<project> is <on track / at risk / falling behind>. <one plain-English reason>
+**Need:** <decision or action needed, owner/audience, and due date>
 
-## RAID Snapshot
-| Item | Why it matters | Owner | Next action | Due/review date | State |
-|------|----------------|-------|-------------|-----------------|-------|
-| | | | | | |
+## Status
+- `green` | `amber` | `red` | `blocked` - <one-line reason>
+- What moved this period: <one outcome line>
+
+## What matters now
+- <1-3 outcome-focused bullets>
+
+## Active risks
+| Risk | Why it matters | Owner | Trigger | Mitigation/next action | Due/review date | State |
+|------|----------------|-------|---------|------------------------|-----------------|-------|
+| | | | | | | |
 
 ## Milestones and Decisions
 | Item | Type | Owner | Next checkpoint | Decision needed |
 |------|------|-------|-----------------|-----------------|
 | | | | | |
 
+## Sources to drill down
+- <tool/report/doc/thread link or source id>
+- <tool/report/doc/thread link or source id>
+
 ## Follow-through
 - Secondary monitor mode to run next:
 - Minimum missing input to improve confidence:
 ```
 
-Include RAID type in each row as `[R]`, `[A]`, `[I]`, or `[D]` prefix in `Item`.
+Include RAID type in each row as `[R]`, `[A]`, `[I]`, or `[D]` prefix in `Risk` or `Item`.
 
 If `blocked`, use the same shape with:
 
@@ -165,7 +187,13 @@ If `blocked`, use the same shape with:
 
 - Keep output operational and concise.
 - Prefer decision-ready bullets and tables over narrative blocks.
+- Keep the top lines fully stand-alone: project state+reason, explicit ask, and current status/movement.
+- Keep asks near the top in bold with a date.
+- Keep the report to one phone screen when possible.
+- Use plain language and highlight only the few words that matter for skim.
+- Avoid proof-of-work phrasing (for example "held sync" or "kicked off review") unless tied to an outcome.
 - Keep unknowns explicit as `TBD`.
 - Do not auto-close items.
 - Preserve source IDs and references when provided.
 - For `amber` or `red`, include one explicit escalation trigger.
+- Call `amber`/`red` early when warranted; do not green-wash uncertain status.

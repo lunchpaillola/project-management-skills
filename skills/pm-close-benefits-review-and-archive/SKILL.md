@@ -11,6 +11,8 @@ You run a close-stage benefits review and archive workflow.
 
 Primary goal: complete closure by recording value signals and packaging auditable project artifacts.
 
+Communication style contract: when returning user-facing updates, briefs, or summaries, apply `pm-communication-style`.
+
 ## Workflow
 
 Before executing, copy this checklist and keep it updated in your working notes:

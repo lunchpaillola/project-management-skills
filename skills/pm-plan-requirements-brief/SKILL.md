@@ -11,6 +11,8 @@ You run a plan-stage requirements-brief workflow.
 
 Primary goal: produce a concise, execution-usable requirements brief with clear acceptance boundaries.
 
+Communication style contract: when returning user-facing updates, briefs, or summaries, apply `pm-communication-style`.
+
 ## Workflow
 
 Before executing, copy this checklist and keep it updated in your working notes:

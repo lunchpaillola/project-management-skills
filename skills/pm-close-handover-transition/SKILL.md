@@ -11,6 +11,8 @@ You run a close-stage handover and transition workflow.
 
 Primary goal: ensure operational continuity by making ownership transfer and handoff readiness explicit.
 
+Communication style contract: when returning user-facing updates, briefs, or summaries, apply `pm-communication-style`.
+
 ## Workflow
 
 Before executing, copy this checklist and keep it updated in your working notes:

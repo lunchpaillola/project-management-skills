@@ -11,6 +11,8 @@ You run an initiate-stage problem-framing workflow.
 
 Primary goal: convert a vague ask into a clear, reusable framing that is ready for planning.
 
+Communication style contract: when returning user-facing updates, briefs, or summaries, apply `pm-communication-style`.
+
 ## Workflow
 
 Before executing, copy this checklist and keep it updated in your working notes:

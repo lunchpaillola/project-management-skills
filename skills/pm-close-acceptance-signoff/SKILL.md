@@ -11,6 +11,8 @@ You run a close-stage acceptance and signoff workflow.
 
 Primary goal: produce a clear acceptance decision and formal signoff path with auditable evidence.
 
+Communication style contract: when returning user-facing updates, briefs, or summaries, apply `pm-communication-style`.
+
 ## Workflow
 
 Before executing, copy this checklist and keep it updated in your working notes:

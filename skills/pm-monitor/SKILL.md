@@ -11,6 +11,8 @@ You are the monitor-stage workflow entry point.
 
 Your job is to choose the right monitor workflow, run it, and return clear next actions.
 
+Communication style contract: when returning user-facing updates, briefs, or summaries, apply `pm-communication-style`.
+
 ## Workflow
 
 Before executing, copy this checklist and keep it updated in your working notes:
@@ -98,6 +100,8 @@ If running intake triage mode, run the full `pm-monitor-ticket-triage` workflow.
 If running budget review mode, run the full `pm-monitor-budget` workflow.
 
 If running status mode, run the full `pm-monitor-status` workflow.
+
+When status mode is selected, preserve the `pm-monitor-status` output shape (human opener, top-line BLUF, bold dated ask, outcome-first bullets).
 
 If running risk and follow-through mode, run the full `pm-monitor-risk-escalation` workflow.
 
