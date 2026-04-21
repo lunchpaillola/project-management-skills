@@ -240,20 +240,28 @@ Do not attempt cross-account lookup. Stay within the current request/account con
 
 ## Runtime Configuration
 
-This skill expects the following to be provided by the execution environment. Do not store secrets in this skill file.
+This skill expects the following environment variables to be injected by the gateway runtime. Do not store secrets in this skill file.
 
-**Required environment variables:**
+**Injected by the chat gateway:**
 
-- `PAILFLOW_API_BASE_URL` - Base URL for the automation gateway (e.g., `https://api.pailflow.io` or `https://sandbox.pailflow.io`)
-- `PAILFLOW_EXECUTION_SECRET` - Authentication secret for API calls (injected by runtime, not hardcoded)
+- `PAILFLOW_API_BASE_URL` - Base URL for the automation gateway (e.g., `https://api.pailflow.io` or `http://localhost:4110` in local mode)
+- `PAILFLOW_EXECUTION_SECRET` - Bearer token for authenticating API calls to `/v1/automations`
+
+**Usage in API calls:**
+
+When calling the automation API endpoints, include the token in the Authorization header:
+
+```
+Authorization: Bearer ${PAILFLOW_EXECUTION_SECRET}
+```
 
 **Derived from request context:**
 
-- `account_id` - Derived from the Slack requester's workspace/team
+- `account_id` - Derived from the Slack requester's workspace/team context
 - `creator_user_id` - Slack user ID of the requester
 - `requester_slack_team_id` - Slack team/workspace ID
 
-The actual HTTP client and authentication handling should be implemented by the gateway or runtime environment, not within this skill.
+The actual HTTP client and authentication handling should use the injected environment variables. Never hardcode credentials in this skill.
 
 ## API Surface
 
