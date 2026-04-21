@@ -238,6 +238,23 @@ Do not attempt cross-account lookup. Stay within the current request/account con
 - Confirm the exact automation before delete.
 - When listing automations, make them easy to scan and compare.
 
+## Runtime Configuration
+
+This skill expects the following to be provided by the execution environment. Do not store secrets in this skill file.
+
+**Required environment variables:**
+
+- `PAILFLOW_API_BASE_URL` - Base URL for the automation gateway (e.g., `https://api.pailflow.io` or `https://sandbox.pailflow.io`)
+- `PAILFLOW_EXECUTION_SECRET` - Authentication secret for API calls (injected by runtime, not hardcoded)
+
+**Derived from request context:**
+
+- `account_id` - Derived from the Slack requester's workspace/team
+- `creator_user_id` - Slack user ID of the requester
+- `requester_slack_team_id` - Slack team/workspace ID
+
+The actual HTTP client and authentication handling should be implemented by the gateway or runtime environment, not within this skill.
+
 ## API Surface
 
 Use these endpoints:
