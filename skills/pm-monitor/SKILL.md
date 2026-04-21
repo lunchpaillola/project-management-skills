@@ -78,6 +78,8 @@ Route to one primary mode:
 
 If multiple intents are present, pick one primary mode and list secondary modes under follow-ups.
 
+Once a primary mode is selected, preserve that mode's strongest status, decision, or blocked signal. Do not soften `blocked`, `red`, or `watch` into a more generic wrapper judgment.
+
 Routing tie-breakers:
 
 - If the user asks what is new, what needs attention first, what needs response, or how to sort incoming work, default to **Intake triage mode** even if tool access is broken or stale-work language is present.
@@ -89,7 +91,7 @@ Routing tie-breakers:
 
 Execution rules:
 
-- preserve source facts and IDs
+- preserve source facts and direct evidence links
 - do not invent owners or deadlines
 - mark unknowns as `TBD`
 - produce decision-ready outputs, not narrative-only summaries
@@ -118,6 +120,7 @@ What this skill must determine before presentation:
 - selected mode
 - why that mode was selected
 - tools or sources actually used
+- human-readable source labels paired with direct links when available
 - missing tools or data gaps when relevant
 - current signal: what needs attention now
 - top risks, priorities, or actions
@@ -126,6 +129,8 @@ What this skill must determine before presentation:
 - closure or escalation recommendation when the user asked for monitor-to-close readiness
 
 Do not force a wrapper report shape here. The communication layer should decide how much structure the user sees.
+
+If the routed result already answers the question directly, do not add a second summary layer on top of it.
 
 ## Rules
 
@@ -137,3 +142,4 @@ Do not force a wrapper report shape here. The communication layer should decide 
 - Keep unknowns explicit as `TBD`.
 - If monitor-to-close readiness is requested and gate evidence is incomplete, set closure recommendation to `blocked` and list only minimum must-fix items.
 - Prefer returning the strongest routed result over adding a second, heavier summary layer on top of it.
+- If a downstream skill yields a direct next action, keep it near the top instead of replacing it with router commentary.

@@ -76,7 +76,11 @@ Before presentation, determine these content elements:
 - single biggest budget driver
 - one decision
 - one accountable next step with owner and due date
-- 1-2 human-readable sources
+- 1-2 human-readable source labels with direct links when available
+
+For `watch`, `red`, or `blocked`, keep both the decision and the accountable next step explicit near the top; do not let one replace the other.
+
+For clear `green` cases, keep the message lean and avoid over-explaining the healthy state.
 
 Do not hardcode the final answer format here. Pass these findings to `pm-communication-style`.
 
@@ -108,7 +112,7 @@ Next: Scope negotiation — Sarah (PM) by Friday
 Biggest driver: [single pressure point, none if healthy]
 Decision: [action choice]
 Next step: [task] — [owner] by [date]
-Sources: [1-2 refs]
+Sources: [1-2 readable labels + direct links]
 ```
 
 **Example:**
@@ -197,6 +201,8 @@ Always apply the same thresholds regardless of audience.
 - Cite 1-2 human-readable sources max (e.g., "Q1 SOW, Linear sprint board")
 - If tools used (Composio, etc.), include: "via [tool] — [record name/ID]"
 - Never dump raw logs or long ID lists
+- When confidence is `medium` or `low`, tie the reason directly to unresolved or missing data rather than generic uncertainty language.
+- For `blocked`, name the exact missing financial source needed to move from directional to decision-ready.
 
 ## Input Patterns
 
@@ -243,3 +249,4 @@ Every action must include: **what**, **who**, **by when**.
 - One biggest driver only — no laundry lists
 - Add confidence when reliability is not obvious or the answer is materially inferred
 - Same decision logic and thresholds, always; let `pm-communication-style` control the final formatting
+- In `watch`, `red`, and `blocked` cases, keep the driver, decision, and next step distinct.

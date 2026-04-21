@@ -154,6 +154,7 @@ What this skill must determine before presentation:
 
 - triage objective used
 - tools and sources used
+- human-readable source labels paired with direct links when available
 - rubric used (default or custom)
 - total item count and counts by recommendation (`ready`, `needs-info`, `defer`, `escalate`)
 - prioritized queue with top items, rationale, owner, and next action
@@ -194,7 +195,7 @@ Always return:
 
 - Keep language short, specific, and operational.
 - Prefer decision-ready outputs over narrative summaries.
-- Preserve existing IDs and links when present.
+- Preserve direct links when present, but prefer readable source labels over raw IDs in user-facing output.
 - Keep unknowns visible as `TBD`.
 - Never auto-close or drop items without recording where they went.
 - Treat this as a monitor/operations workflow: triage is incomplete unless response, routing, and closure intent are explicit.

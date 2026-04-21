@@ -126,6 +126,8 @@ Risk quality gate:
 
 Do not collapse risk and issue into one bucket. If an item is happening now, classify it as an issue.
 
+Keep source facts and inference separate in working analysis. Only surface the inference in the final message when it changes the decision, action, or escalation path.
+
 ## Step 5: Clarify decisions and next milestones
 
 List:
@@ -148,7 +150,8 @@ What this skill must determine before presentation:
 - what needs attention now
 - the smallest useful set of RAID items
 - one explicit decision, owner, or next action near the top when applicable
-- sources to drill down
+- for `yellow`, `red`, or `blocked`, one explicit owner-action-escalation package near the top
+- sources to drill down, using human-readable labels with direct links when available
 - minimum missing input when confidence is limited
 
 Include RAID type as `[R]`, `[A]`, `[I]`, or `[D]` when useful, but do not force tables if a short bullet is clearer.
@@ -165,11 +168,14 @@ If `blocked`, say so plainly and include:
 - Prefer decision-ready bullets over narrative blocks. Use tables only when they genuinely improve clarity.
 - Keep the top lines fully stand-alone: project state+reason, explicit ask, and current status/movement.
 - Keep asks near the top in bold with a date.
+- For `yellow`, `red`, or `blocked`, make one owner-action-escalation package explicit near the top instead of leaving follow-through implied.
 - Keep the report to one phone screen when possible.
 - Use plain language and highlight only the few words that matter for skim.
 - Avoid proof-of-work phrasing (for example "held sync" or "kicked off review") unless tied to an outcome.
 - Keep unknowns explicit as `TBD`.
+- When source quality is `medium` or `low`, surface the minimum missing input in the final message.
 - Do not auto-close items.
-- Preserve source IDs and references when provided.
+- Preserve source references and direct links when provided, but prefer readable labels over raw IDs in the final output.
 - For `yellow` or `red`, include one explicit escalation trigger.
 - Call `yellow`/`red` early when warranted; do not green-wash uncertain status.
+- Prefer one or two RAID items in the final output unless more are necessary to explain the state.

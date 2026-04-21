@@ -100,6 +100,7 @@ What this skill must determine before presentation:
 
 - escalation objective
 - tools or data sources actually used
+- human-readable source labels paired with direct links when available
 - missing tools or data gaps when relevant
 - overall escalation signal: `stable` | `watch` | `escalate-now` | `blocked`
 - top tolerance pressure

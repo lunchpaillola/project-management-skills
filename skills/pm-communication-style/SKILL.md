@@ -82,6 +82,10 @@ Default to chat-friendly formatting unless the user explicitly asks for prose pa
 - use standalone section headers only when the update truly needs multiple bullets under that section
 - bold only scan targets: status color, asks, deadlines, dollar amounts, owners, and decision words
 - for chat-friendly status updates, prefer status emoji plus word together: `🟢 Green`, `🟡 Yellow`, `🔴 Red`, `⛔ Blocked`
+- for sources and evidence, prefer human-readable labels linked directly to the supporting record or doc
+- do not expose raw record IDs as the visible source label unless the user explicitly asks for IDs
+- for autonomous Slack updates, use either a title line or an opening summary sentence, but not both
+- do not restate the same punchline in adjacent lines
 - keep the opening summary to 1-2 short sentences max
 - keep bullets to one line when possible
 - if a section has only one item, prefer a single bullet or 2-3 short wrapped lines over a dense sentence
@@ -99,12 +103,14 @@ Use this by default for Slack, chat, and short readouts:
 - **Status:** **<emoji + green/yellow/red/blocked>** - <one-line reason>
 - **What matters:** <1 short outcome line>
 - **Risk:** <owner + trigger + mitigation>
-- **Sources:** <best source>; <second source if needed>
+- **Sources:** [<human-readable label>](<direct link>); [<second label>](<direct link>)
 ```
 
 Keep this to 4-6 lines after the opener unless the extra detail changes a decision.
 
 If this is a direct reply rather than an autonomous report, omit the opener entirely.
+
+For direct replies, default to 3-4 bullets and drop low-value metadata or caveat lines unless they materially change the decision.
 
 ## Expanded Human Structure
 
@@ -127,8 +133,8 @@ Use this when the situation needs a little more room:
   Mitigation: <action>
 
 **Sources**
-- <link or record>
-- <link or record>
+- [<human-readable label>](<direct link>)
+- [<human-readable label>](<direct link>)
 ```
 
 ## Executive Short Form (one-screen)
@@ -142,7 +148,7 @@ Use this when leaders want the absolute shortest update:
 - **Status:** **<emoji + green/yellow/red/blocked>** - <reason>
 - **Moved:** <one outcome line>
 - **Risk:** <owner + trigger + mitigation>
-- **Source:** <single best link or record>
+- **Source:** [<human-readable label>](<direct link>)
 ```
 
 In most Slack cases, prefer this short form over the expanded structure.
@@ -156,6 +162,7 @@ Before returning the message, apply these filters:
 - Ask visibility: if the ask is not obvious in the top three lines, rewrite
 - Risk quality gate: if owner/trigger/mitigation is missing, move it out of active risk list
 - Slack compression test: if the message reads like a status memo instead of a chat update, compress it
+- Duplication cut: if line 2 mostly repeats line 1, merge or delete one of them
 
 ## Language and Formatting
 
@@ -168,6 +175,8 @@ Before returning the message, apply these filters:
 - prefer `**Label**` + short content over plain unformatted section names sitting alone on a line
 - if the message feels flat or visually monotonous, break it into shorter sections before adding more words
 - do not add multiple section headings when 4 compact labeled bullets would communicate the same thing better
+- if a confidence note or caveat matters, fold it into an existing source, status, or action line before adding a new standalone line
+- preserve direct evidence links when available; rewrite the display text into a readable label rather than pasting raw IDs
 
 ## Variants
 

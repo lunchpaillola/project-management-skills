@@ -1,6 +1,8 @@
 ---
 name: pailflow-workflow-automation
 description: Handle Slack-driven recurring automations for PailFlow. Use this whenever the user wants something sent on a schedule, asks for a recurring report or reminder, says things like daily, weekly, every Monday, every month, recurring, automate this, remind me every, send me every, or wants to delete/check an existing recurring automation in natural language. This skill should also trigger for list/read/delete requests about existing automations, even if the user does not use the word automation.
+metadata:
+  version: 0.1.0
 ---
 
 # PailFlow Workflow Automation
@@ -79,7 +81,7 @@ Follow this sequence:
    - switch to channel only if explicitly requested
 5. Ask follow-up questions for anything missing.
 6. Build the resolved automation prompt that should run in the future.
-7. Confirm the final setup in plain language.
+7. Confirm the final setup in plain language, including the exact execution prompt that will run later.
 8. Call the automation create endpoint.
 9. Return a concise confirmation message to the user.
 
@@ -95,9 +97,12 @@ I can create this automation:
 - Timezone: America/New_York
 - Destination: DM to you
 - Task: Send a budget debrief
+- Execution prompt: Generate a budget debrief for the current account and send a concise Slack-ready summary with risks, budget drift, and next actions.
 
 Should I create it?
 ```
+
+Do not skip the execution-prompt line during confirmation. The user should see the exact future-run intent before you create the automation.
 
 ## Create Payload Requirements
 
@@ -116,6 +121,12 @@ When calling `POST /v1/automations`, include or derive the following:
 - `delivery.destination_ref`
 
 Preserve the user's original wording in `user_request_text`. Put the cleaned-up execution instructions in `automation_prompt`.
+
+### Prompt Construction Rule
+
+- `user_request_text` should preserve the user's original ask as closely as possible.
+- `automation_prompt` should be the resolved future-run instruction set.
+- Before create, show the resolved prompt back to the user in plain language and get explicit confirmation.
 
 ## List Workflow
 
@@ -155,7 +166,7 @@ Follow this sequence:
 
 1. Interpret the user's delete intent.
 2. List likely matches if the target is not already unambiguous.
-3. Read the selected automation if needed.
+3. Read the selected automation if needed, especially when multiple candidates are close or you need to restate the exact schedule, timezone, destination, and task.
 4. Confirm the exact automation to delete.
 5. Call `DELETE /v1/automations/:id`.
 6. Return a short confirmation message.
@@ -173,6 +184,12 @@ I think you mean this automation:
 
 Should I delete it?
 ```
+
+Delete safety rule:
+
+- If the user names an automation vaguely, list first.
+- If there is still ambiguity, read the best candidate and restate it.
+- Only call delete after explicit user confirmation.
 
 ## Handling Ambiguity
 
@@ -246,8 +263,21 @@ Skill behavior:
 2. Resolve Slack timezone if available.
 3. Confirm timezone.
 4. Default destination to DM unless the user wants a channel.
-5. Confirm the final setup.
+5. Confirm the final setup, including the exact execution prompt that will run on each future occurrence.
 6. Create the automation.
+
+Example confirmation:
+
+```text
+I can create this automation:
+- Schedule: Every Monday at 6:00 AM
+- Timezone: America/New_York
+- Destination: DM to you
+- Task: Budget debrief
+- Execution prompt: Generate a budget debrief for the current account, highlight budget drift and delivery risks, and format it as a concise Slack update.
+
+Should I create it?
+```
 
 ## Example Delete Outcome
 
@@ -261,5 +291,6 @@ Skill behavior:
 
 1. List matching automations.
 2. Identify the likely match.
-3. Confirm it with the user.
-4. Delete only after confirmation.
+3. Read the candidate when needed to restate the exact schedule, timezone, destination, and task.
+4. Confirm it with the user.
+5. Delete only after confirmation.
