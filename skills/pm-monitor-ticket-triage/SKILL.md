@@ -13,7 +13,7 @@ This skill can be invoked directly, or selected via the `pm-monitor` entry-point
 
 Primary goal: make each item response-ready, owner-ready, and execution-ready.
 
-Communication style contract: when returning user-facing updates, briefs, or summaries, apply `pm-communication-style`.
+Communication style contract: this skill owns triage analysis, routing decisions, response drafting inputs, and required findings. `pm-communication-style` owns the final presentation of any user-facing answer.
 
 ## Workflow
 
@@ -148,50 +148,23 @@ Create closure guidance for each item:
 
 Each item must end with one explicit next state.
 
-Always produce these sections in order:
+After triage, hand the findings to `pm-communication-style` for presentation.
 
-```md
-# Triage Report - <YYYY-MM-DD>
+What this skill must determine before presentation:
 
-## Intake Summary
-- Total items:
-- By classification:
-- By priority:
-- Ready now:
-- Needs info:
-- Deferred:
-- Escalated:
+- triage objective used
+- tools and sources used
+- rubric used (default or custom)
+- total item count and counts by recommendation (`ready`, `needs-info`, `defer`, `escalate`)
+- prioritized queue with top items, rationale, owner, and next action
+- explicit list of items blocked by missing context, with one concrete follow-up question each
+- response queue with short comment drafts and task conversion decisions
+- deferred or parked items with review dates when known
+- escalations with target and decision-needed timing when known
+- closure summary (`close now`, `keep open`, `escalate` counts)
+- tool or data gaps that reduced confidence
 
-## Prioritized Queue
-| Rank | Item | Classification | Priority | Owner | Next Action | Status Recommendation |
-|------|------|----------------|----------|-------|-------------|-----------------------|
-| 1 | | | | | | |
-
-## Needs-Info Queue
-| Item | Missing context | Follow-up question | Suggested owner |
-|------|-----------------|--------------------|-----------------|
-| | | | |
-
-## Response Queue
-| Item | Channel | Draft response | Task conversion | Assigned owner |
-|------|---------|----------------|-----------------|----------------|
-| | | | | |
-
-## Deferred / Parked
-| Item | Reason | Review date | Owner |
-|------|--------|-------------|-------|
-| | | | |
-
-## Escalations
-| Item | Why escalate | Escalation target | Decision needed by |
-|------|--------------|-------------------|--------------------|
-| | | | |
-
-## Closure Signals
-| Item | Recommended state | Close criteria | Next checkpoint |
-|------|-------------------|----------------|-----------------|
-| | | | |
-```
+Do not force ordered sections or tables here unless the communication layer decides they genuinely help the user.
 
 ## Optional adapter modes
 

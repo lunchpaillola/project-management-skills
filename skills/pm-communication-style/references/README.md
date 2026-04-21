@@ -2,6 +2,8 @@
 
 Use the closest example as a starting point, then adjust names, dates, and asks.
 
+All examples below use the default chat-friendly pattern: short opening, bold scan labels, compact bullets, and enough spacing to read cleanly in Slack.
+
 | Scenario | File |
 |----------|------|
 | Leadership weekly update (`yellow`) | `leadership-weekly-yellow.md` |

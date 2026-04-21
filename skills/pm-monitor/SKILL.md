@@ -9,9 +9,9 @@ metadata:
 
 You are the monitor-stage workflow entry point.
 
-Your job is to choose the right monitor workflow, run it, and return clear next actions.
+Your job is to choose the right monitor workflow, run it, and return the clearest monitor findings and next actions.
 
-Communication style contract: when returning user-facing updates, briefs, or summaries, apply `pm-communication-style`.
+Communication style contract: this skill owns routing, research steps, required facts, and follow-up logic. `pm-communication-style` owns the final presentation of any user-facing answer.
 
 ## Workflow
 
@@ -94,6 +94,7 @@ Execution rules:
 - mark unknowns as `TBD`
 - produce decision-ready outputs, not narrative-only summaries
 - stay inside the source boundary the user implied; do not mine unrelated local repo state or git activity as a substitute for PM/tool data unless the user explicitly asked you to inspect the repo as the monitor source
+- focus first on what must be researched, reconciled, and verified before thinking about wording
 
 If running intake triage mode, run the full `pm-monitor-ticket-triage` workflow.
 
@@ -101,55 +102,30 @@ If running budget review mode, run the full `pm-monitor-budget` workflow.
 
 If running status mode, run the full `pm-monitor-status` workflow.
 
-When status mode is selected, preserve the `pm-monitor-status` output shape (human opener, top-line BLUF, bold dated ask, outcome-first bullets).
+When status mode is selected, preserve the `pm-monitor-status` content requirements and let `pm-communication-style` decide the final presentation shape.
 
 If running risk and follow-through mode, run the full `pm-monitor-risk-escalation` workflow.
 
-If a referenced subskill is unavailable, run the equivalent workflow inline and preserve the same output contract.
+If a referenced subskill is unavailable, run the equivalent workflow inline and preserve the same content contract.
 
-### Step 5: Return monitor summary
+### Step 5: Return monitor findings
 
-Always return this structure:
+After running the selected workflow, hand the findings to `pm-communication-style` for presentation.
 
-```md
-# Monitor Summary - <YYYY-MM-DD>
+What this skill must determine before presentation:
 
-## Objective
-- Monitoring objective:
+- monitoring objective
+- selected mode
+- why that mode was selected
+- tools or sources actually used
+- missing tools or data gaps when relevant
+- current signal: what needs attention now
+- top risks, priorities, or actions
+- unknowns as `TBD` when needed
+- follow-ups or secondary monitor modes when useful
+- closure or escalation recommendation when the user asked for monitor-to-close readiness
 
-## Selected Mode
-- Mode:
-- Why selected:
-
-## Tool Access Check
-- Tools and systems used:
-- Data sources used:
-- Missing tools or data gaps:
-
-## Current Signal
-- What needs attention now:
-- Top 3 risks or priorities:
-
-## Actions
-| Item | Owner | Next action | Due/review date | Status | Evidence/source |
-|------|-------|-------------|-----------------|--------|-----------------|
-| | | | | | |
-
-## Unknowns
-- TBD:
-
-## Lane Handoff Gate
-- `monitor -> close` readiness:
-- Acceptance readiness signal:
-- Open risk disposition status:
-- Closure recommendation: `go` | `go-with-conditions` | `blocked`
-- Missing gate requirement (if any):
-
-## Follow-ups
-- Secondary monitor modes worth running next:
-- Missing context to resolve:
-- Escalation trigger (if tolerance breach is likely):
-```
+Do not force a wrapper report shape here. The communication layer should decide how much structure the user sees.
 
 ## Rules
 
@@ -160,3 +136,4 @@ Always return this structure:
 - If tool access is broken but the user still wants a monitor pass, keep the originally selected mode when the request makes it clear, continue with request-text context only, and ask for the minimum substitute source needed.
 - Keep unknowns explicit as `TBD`.
 - If monitor-to-close readiness is requested and gate evidence is incomplete, set closure recommendation to `blocked` and list only minimum must-fix items.
+- Prefer returning the strongest routed result over adding a second, heavier summary layer on top of it.
