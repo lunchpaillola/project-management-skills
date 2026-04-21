@@ -15,11 +15,11 @@ Status writing rule: make the opening lines carry the report. Leaders should und
 
 RAG/RAID operating rule:
 
-- express delivery state as RAG (`green`, `amber`, `red`, `blocked`)
+- express delivery state as RAG (`green`, `yellow`, `red`, `blocked`)
 - maintain a concise RAID view (`risks`, `assumptions`, `issues`, `dependencies`)
-- map each red/amber signal to an owner, next action, and escalation trigger
+- map each red/yellow signal to an owner, next action, and escalation trigger
 
-Communication style contract: when returning user-facing updates, briefs, or summaries, apply `pm-communication-style`.
+Communication style contract: this skill owns status analysis, RAID reasoning, and required ownership signals. `pm-communication-style` owns the final presentation of any user-facing answer.
 
 ## Workflow
 
@@ -53,10 +53,7 @@ Set audience tone and detail level:
 - team-level: specific tasks and owner actions
 - leadership-level: concise signal, major risks, and decision asks
 
-Channel-specific header rule:
-
-- email/docs: treat the title line as the subject line and include project, state, and time-bound ask
-- Slack/chat: either start with subject-line-style first line, or open with "Hi all," and put the full BLUF in the next line
+Do not decide final wording or opener shape here. Hand the findings to `pm-communication-style`.
 
 ## Step 2: Confirm sources and signal quality
 
@@ -81,7 +78,7 @@ Return `blocked` only when no usable project-status signal exists.
 
 Build a concise status signal:
 
-- current state: `green`, `amber`, `red`, or `blocked`
+- current state: `green`, `yellow`, `red`, or `blocked`
 - what changed since the previous visible checkpoint
 - what needs attention now
 
@@ -90,7 +87,7 @@ Prefer outcomes over activity logs. Report movement in terms of delivered impact
 Use these default status heuristics unless a project-specific rubric is provided:
 
 - `green`: no material blockers, plan variance appears recoverable within existing owners and timeline
-- `amber`: one or more meaningful risks, delays, or owner gaps need active management this cycle
+- `yellow`: one or more meaningful risks, delays, or owner gaps need active management this cycle
 - `red`: delivery objective is at material risk without immediate intervention, replan, or escalation
 - `blocked`: essential source signal is missing or critical dependency makes progress impossible now
 
@@ -129,6 +126,8 @@ Risk quality gate:
 
 Do not collapse risk and issue into one bucket. If an item is happening now, classify it as an issue.
 
+Keep source facts and inference separate in working analysis. Only surface the inference in the final message when it changes the decision, action, or escalation path.
+
 ## Step 5: Clarify decisions and next milestones
 
 List:
@@ -139,61 +138,44 @@ List:
 
 If a decision owner is unclear, mark `TBD` and suggest the responsible role.
 
-## Step 6: Return the status output
+## Step 6: Return the status findings
 
-Default to a concise, meeting-ready report:
+After analysis, hand the findings to `pm-communication-style` for final presentation.
 
-```md
-Hi all,
+What this skill must determine before presentation:
 
-<project> is <on track / at risk / falling behind>. <one plain-English reason>
-**Need:** <decision or action needed, owner/audience, and due date>
+- current state: `green`, `yellow`, `red`, or `blocked`
+- one-line reason for current state
+- what changed or moved this period
+- what needs attention now
+- the smallest useful set of RAID items
+- one explicit decision, owner, or next action near the top when applicable
+- for `yellow`, `red`, or `blocked`, one explicit owner-action-escalation package near the top
+- sources to drill down, using human-readable labels with direct links when available
+- minimum missing input when confidence is limited
 
-## Status
-- `green` | `amber` | `red` | `blocked` - <one-line reason>
-- What moved this period: <one outcome line>
+Include RAID type as `[R]`, `[A]`, `[I]`, or `[D]` when useful, but do not force tables if a short bullet is clearer.
 
-## What matters now
-- <1-3 outcome-focused bullets>
+If `blocked`, say so plainly and include:
 
-## Active risks
-| Risk | Why it matters | Owner | Trigger | Mitigation/next action | Due/review date | State |
-|------|----------------|-------|---------|------------------------|-----------------|-------|
-| | | | | | | |
-
-## Milestones and Decisions
-| Item | Type | Owner | Next checkpoint | Decision needed |
-|------|------|-------|-----------------|-----------------|
-| | | | | |
-
-## Sources to drill down
-- <tool/report/doc/thread link or source id>
-- <tool/report/doc/thread link or source id>
-
-## Follow-through
-- Secondary monitor mode to run next:
-- Minimum missing input to improve confidence:
-```
-
-Include RAID type in each row as `[R]`, `[A]`, `[I]`, or `[D]` prefix in `Risk` or `Item`.
-
-If `blocked`, use the same shape with:
-
-- Status: `blocked`
-- Missing source: one concrete input
-- Best next step: how to provide or connect it
+- one concrete missing source
+- why it matters
+- best next step to unblock
 
 ## Rules
 
 - Keep output operational and concise.
-- Prefer decision-ready bullets and tables over narrative blocks.
+- Prefer decision-ready bullets over narrative blocks. Use tables only when they genuinely improve clarity.
 - Keep the top lines fully stand-alone: project state+reason, explicit ask, and current status/movement.
 - Keep asks near the top in bold with a date.
+- For `yellow`, `red`, or `blocked`, make one owner-action-escalation package explicit near the top instead of leaving follow-through implied.
 - Keep the report to one phone screen when possible.
 - Use plain language and highlight only the few words that matter for skim.
 - Avoid proof-of-work phrasing (for example "held sync" or "kicked off review") unless tied to an outcome.
 - Keep unknowns explicit as `TBD`.
+- When source quality is `medium` or `low`, surface the minimum missing input in the final message.
 - Do not auto-close items.
-- Preserve source IDs and references when provided.
-- For `amber` or `red`, include one explicit escalation trigger.
-- Call `amber`/`red` early when warranted; do not green-wash uncertain status.
+- Preserve source references and direct links when provided, but prefer readable labels over raw IDs in the final output.
+- For `yellow` or `red`, include one explicit escalation trigger.
+- Call `yellow`/`red` early when warranted; do not green-wash uncertain status.
+- Prefer one or two RAID items in the final output unless more are necessary to explain the state.

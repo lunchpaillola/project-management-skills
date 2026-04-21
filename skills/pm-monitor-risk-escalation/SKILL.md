@@ -11,7 +11,7 @@ You run a monitor-stage risk escalation workflow.
 
 Primary goal: convert risk and blocker signals into explicit escalation decisions and follow-through.
 
-Communication style contract: when returning user-facing updates, briefs, or summaries, apply `pm-communication-style`.
+Communication style contract: this skill owns escalation analysis, tolerance reasoning, and required findings. `pm-communication-style` owns the final presentation of any user-facing answer.
 
 ## Workflow
 
@@ -92,42 +92,25 @@ For each escalated item, make the fallback explicit in the returned actions (not
 
 Mark unknowns as `TBD`.
 
-## Step 6: Return risk escalation output
+## Step 6: Return risk escalation findings
 
-Always return this structure:
+After analysis, hand the findings to `pm-communication-style` for presentation.
 
-```md
-# Risk Escalation - <project name or YYYY-MM-DD>
+What this skill must determine before presentation:
 
-## Objective
-- Escalation objective:
+- escalation objective
+- tools or data sources actually used
+- human-readable source labels paired with direct links when available
+- missing tools or data gaps when relevant
+- overall escalation signal: `stable` | `watch` | `escalate-now` | `blocked`
+- top tolerance pressure
+- what needs attention now
+- source quality and one best missing source when confidence is below `high`
+- escalation actions with owners, due dates, and fallback paths when known
+- unknowns as `TBD` when needed
+- follow-ups or next escalation steps when useful
 
-## Tool Access Check
-- Tools and systems used:
-- Data sources used:
-- Missing tools or data gaps:
-
-## Current Signal
-- Overall escalation signal: `stable` | `watch` | `escalate-now` | `blocked`
-- Top tolerance pressure:
-- What needs attention now:
-
-## Confidence
-- Source quality: `high` | `medium` | `low`
-- One best missing source to improve confidence (if not `high`):
-
-## Actions
-| Item | Owner | Next action | Due/review date | Status | Evidence/source |
-|------|-------|-------------|-----------------|--------|-----------------|
-| | | | | | |
-
-## Unknowns
-- TBD:
-
-## Follow-ups
-- Escalations that must happen next:
-- Recommended next skill: `pm-close-acceptance-signoff` (when risk disposition is complete)
-```
+Do not force a wrapper report shape here. The communication layer should decide how much structure the user sees.
 
 ## Rules
 

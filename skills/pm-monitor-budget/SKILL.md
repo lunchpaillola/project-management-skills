@@ -28,7 +28,7 @@ Prioritize financial truth over delivery proxies. Use the core model:
 - **No laundry lists** — name only the single biggest budget driver
 - **One decision** per response
 - **One accountable next step** with owner + due date
-- **Confidence signal** on every answer (how reliable is this number?)
+- **Confidence signal when it matters**: include it when the data is incomplete, inferred, mixed-quality, or the decision depends on reliability
 - **1-2 lightweight sources** — human-readable refs, not ID dumps
 
 ## Audience Modes
@@ -45,7 +45,7 @@ Default to **PM brief** unless context suggests otherwise.
 
 ## Confidence Levels
 
-Signal reliability on every answer:
+Signal reliability whenever confidence is decision-relevant or non-obvious:
 
 | Level | Data completeness | Signal |
 |-------|-------------------|--------|
@@ -53,7 +53,7 @@ Signal reliability on every answer:
 | **Medium** | Baseline + strong progress signals, limited actuals | "Medium confidence — forecast based on delivery signals" |
 | **Low** | Baseline only or weak signals | "Low confidence — directional only; connect [PM or finance source] to firm this up" |
 
-Communication style contract: when returning user-facing updates, briefs, or summaries, apply `pm-communication-style`.
+Communication style contract: this skill owns budget analysis, source evaluation, thresholds, and required findings. `pm-communication-style` owns the final presentation of any user-facing answer.
 
 ## Workflow (Internal)
 
@@ -66,9 +66,27 @@ Use this lightweight 6-step model (don't expose step-by-step in output):
 5. **Variance**: EAC vs baseline
 6. **Decision + Action**: what to do, who owns it, by when
 
-## Output Formats
+## Required Findings
 
-### CEO Brief (2-3 lines)
+Before presentation, determine these content elements:
+
+- budget judgment: yes/no/watch/blocked
+- one-line EAC vs baseline summary when available
+- confidence level with a short why when confidence is not obvious from the data
+- single biggest budget driver
+- one decision
+- one accountable next step with owner and due date
+- 1-2 human-readable source labels with direct links when available
+
+For `watch`, `red`, or `blocked`, keep both the decision and the accountable next step explicit near the top; do not let one replace the other.
+
+For clear `green` cases, keep the message lean and avoid over-explaining the healthy state.
+
+Do not hardcode the final answer format here. Pass these findings to `pm-communication-style`.
+
+## Reference Content Shapes
+
+### CEO Brief
 
 ```
 ✅ On budget | ⚠️ Watch | 🚨 At risk — [one-line financial summary]
@@ -85,16 +103,16 @@ Variance: +15% | Biggest driver: unapproved reporting asks
 Next: Scope negotiation — Sarah (PM) by Friday
 ```
 
-### PM Brief (4-6 lines) — DEFAULT
+### PM Brief - default content emphasis
 
 ```
 [Yes/No/Watch] — [EAC vs baseline in one line]
 
-Confidence: [high/medium/low] — [why]
+[Confidence: [high/medium/low] — [why]]
 Biggest driver: [single pressure point, none if healthy]
 Decision: [action choice]
 Next step: [task] — [owner] by [date]
-Basis: [actuals/estimate/inference] | Sources: [1-2 refs]
+Sources: [1-2 readable labels + direct links]
 ```
 
 **Example:**
@@ -108,7 +126,7 @@ Next step: Confirm revised timeline with client — Jake by Wed 4/16
 Basis: Actual hours + estimated commitments | Sources: Q1 SOW, Harvest timesheets
 ```
 
-### Finance Brief (margin-focused)
+### Finance Brief - margin-focused content
 
 ```
 [Status] — EAC [$X], Baseline [$X], Variance [+$X / +X%]
@@ -183,6 +201,8 @@ Always apply the same thresholds regardless of audience.
 - Cite 1-2 human-readable sources max (e.g., "Q1 SOW, Linear sprint board")
 - If tools used (Composio, etc.), include: "via [tool] — [record name/ID]"
 - Never dump raw logs or long ID lists
+- When confidence is `medium` or `low`, tie the reason directly to unresolved or missing data rather than generic uncertainty language.
+- For `blocked`, name the exact missing financial source needed to move from directional to decision-ready.
 
 ## Input Patterns
 
@@ -227,5 +247,6 @@ Every action must include: **what**, **who**, **by when**.
 - Financial truth beats delivery narrative
 - 4-6 lines max, one decision, one accountable step
 - One biggest driver only — no laundry lists
-- Confidence signal every time
-- Same structure, same thresholds, always
+- Add confidence when reliability is not obvious or the answer is materially inferred
+- Same decision logic and thresholds, always; let `pm-communication-style` control the final formatting
+- In `watch`, `red`, and `blocked` cases, keep the driver, decision, and next step distinct.
