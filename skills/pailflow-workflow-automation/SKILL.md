@@ -122,11 +122,86 @@ When calling `POST /v1/automations`, include or derive the following:
 
 Preserve the user's original wording in `user_request_text`. Put the cleaned-up execution instructions in `automation_prompt`.
 
+### Schedule Normalization Rule
+
+`schedule_natural_language` is the human-readable version.
+
+`schedule_normalized` must be a structured JSON object. Do **not** send cron strings.
+
+Accepted shapes:
+
+- Daily:
+
+```json
+{
+  "frequency": "daily",
+  "hour": 0,
+  "minute": 15
+}
+```
+
+- Weekly:
+
+```json
+{
+  "frequency": "weekly",
+  "weekday": 1,
+  "hour": 6,
+  "minute": 0
+}
+```
+
+Weekday mapping:
+
+- `1` = Monday
+- `2` = Tuesday
+- `3` = Wednesday
+- `4` = Thursday
+- `5` = Friday
+- `6` = Saturday
+- `7` = Sunday
+
+- Monthly:
+
+```json
+{
+  "frequency": "monthly",
+  "day_of_month": 1,
+  "hour": 9,
+  "minute": 0
+}
+```
+
+- Weekdays:
+
+```json
+{
+  "frequency": "weekdays",
+  "hour": 9,
+  "minute": 0
+}
+```
+
+Never send values like:
+
+```json
+"15 0 * * *"
+```
+
+or:
+
+```json
+"0 15 0 * * *"
+```
+
+Those cron-style strings are invalid for this API.
+
 ### Prompt Construction Rule
 
 - `user_request_text` should preserve the user's original ask as closely as possible.
 - `automation_prompt` should be the resolved future-run instruction set.
 - Before create, show the resolved prompt back to the user in plain language and get explicit confirmation.
+- Before create, ensure `schedule_normalized` is a structured object, not a cron string.
 
 ## List Workflow
 
@@ -246,6 +321,11 @@ This skill expects the following environment variables to be injected by the gat
 
 - `PAILFLOW_API_BASE_URL` - Base URL for the automation gateway (e.g., `https://api.pailflow.io` or `http://localhost:4110` in local mode)
 - `PAILFLOW_EXECUTION_SECRET` - Bearer token for authenticating API calls to `/v1/automations`
+- `PAILFLOW_ACCOUNT_ID` - Resolved account ID for the current Slack runtime when available
+- `PAILFLOW_ACCOUNT_NAME` - Human-readable account name when available
+- `PAILFLOW_CREATOR_USER_ID` - Internal creator user ID when available
+- `PAILFLOW_REQUESTER_SLACK_USER_ID` - Slack user ID of the requester when available
+- `PAILFLOW_REQUESTER_SLACK_TEAM_ID` - Slack workspace/team ID for the current runtime when available
 
 **Usage in API calls:**
 
@@ -257,9 +337,10 @@ Authorization: Bearer ${PAILFLOW_EXECUTION_SECRET}
 
 **Derived from request context:**
 
-- `account_id` - Derived from the Slack requester's workspace/team context
-- `creator_user_id` - Slack user ID of the requester
-- `requester_slack_team_id` - Slack team/workspace ID
+- `account_id` - Prefer `PAILFLOW_ACCOUNT_ID` when present instead of asking the user
+- `creator_user_id` - Prefer `PAILFLOW_CREATOR_USER_ID` when present
+- `requester_slack_user_id` - Prefer `PAILFLOW_REQUESTER_SLACK_USER_ID` when present
+- `requester_slack_team_id` - Prefer `PAILFLOW_REQUESTER_SLACK_TEAM_ID` when present
 
 The actual HTTP client and authentication handling should use the injected environment variables. Never hardcode credentials in this skill.
 
@@ -272,11 +353,16 @@ When this skill is running inside the PailFlow Slack sandbox, you should assume 
 
 If both variables are present, do **not** tell the user that you lack API access. Use the available shell/HTTP tooling to call the gateway automation API.
 
+If `PAILFLOW_ACCOUNT_ID` is present, do **not** ask the user for an account ID. Use the injected value.
+If `PAILFLOW_REQUESTER_SLACK_USER_ID` is present, do **not** ask the user for their Slack user ID. Use the injected value.
+If `PAILFLOW_REQUESTER_SLACK_TEAM_ID` is present, do **not** ask the user for their Slack team/workspace ID. Use the injected value.
+
 Preferred path:
 
 1. Check that `PAILFLOW_API_BASE_URL` and `PAILFLOW_EXECUTION_SECRET` are present.
-2. Use `bash` with `curl` to call the gateway endpoint.
-3. Parse the JSON response and continue the user flow.
+2. If `PAILFLOW_ACCOUNT_ID` is present, use it as `account_id`.
+3. Use `bash` with `curl` to call the gateway endpoint.
+4. Parse the JSON response and continue the user flow.
 
 Only say you are blocked on API access if those environment variables are actually missing from the runtime.
 
@@ -307,6 +393,9 @@ Failure rule:
 
 - If the env vars are missing, say exactly which ones are missing.
 - Do not vaguely say the environment lacks direct API access unless you verified the env vars are unavailable.
+- Do not ask the user for `account_id` if `PAILFLOW_ACCOUNT_ID` is already available.
+- Do not ask the user for `requester_slack_user_id` if `PAILFLOW_REQUESTER_SLACK_USER_ID` is already available.
+- Do not ask the user for `requester_slack_team_id` if `PAILFLOW_REQUESTER_SLACK_TEAM_ID` is already available.
 
 ## API Surface
 
