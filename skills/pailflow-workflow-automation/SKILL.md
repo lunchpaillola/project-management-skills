@@ -263,6 +263,51 @@ Authorization: Bearer ${PAILFLOW_EXECUTION_SECRET}
 
 The actual HTTP client and authentication handling should use the injected environment variables. Never hardcode credentials in this skill.
 
+## Execution Contract
+
+When this skill is running inside the PailFlow Slack sandbox, you should assume you can call the automation API directly if these environment variables are present:
+
+- `PAILFLOW_API_BASE_URL`
+- `PAILFLOW_EXECUTION_SECRET`
+
+If both variables are present, do **not** tell the user that you lack API access. Use the available shell/HTTP tooling to call the gateway automation API.
+
+Preferred path:
+
+1. Check that `PAILFLOW_API_BASE_URL` and `PAILFLOW_EXECUTION_SECRET` are present.
+2. Use `bash` with `curl` to call the gateway endpoint.
+3. Parse the JSON response and continue the user flow.
+
+Only say you are blocked on API access if those environment variables are actually missing from the runtime.
+
+Example create call shape:
+
+```bash
+curl -sS -X POST "$PAILFLOW_API_BASE_URL/v1/automations" \
+  -H "Authorization: Bearer $PAILFLOW_EXECUTION_SECRET" \
+  -H "Content-Type: application/json" \
+  -d '{...json payload...}'
+```
+
+Example list call shape:
+
+```bash
+curl -sS "$PAILFLOW_API_BASE_URL/v1/automations?account_id=<account_id>" \
+  -H "Authorization: Bearer $PAILFLOW_EXECUTION_SECRET"
+```
+
+Example delete call shape:
+
+```bash
+curl -sS -X DELETE "$PAILFLOW_API_BASE_URL/v1/automations/<id>?account_id=<account_id>" \
+  -H "Authorization: Bearer $PAILFLOW_EXECUTION_SECRET"
+```
+
+Failure rule:
+
+- If the env vars are missing, say exactly which ones are missing.
+- Do not vaguely say the environment lacks direct API access unless you verified the env vars are unavailable.
+
 ## API Surface
 
 Use these endpoints:
